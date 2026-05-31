@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Zap, Dumbbell, ArrowRight, Leaf } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Hero = () => {
   const containerVariants = {
@@ -105,12 +106,12 @@ const Hero = () => {
 
           {/* Call To Actions */}
           <motion.div variants={itemVariants} className="flex flex-wrap items-center gap-6 mt-10">
-            <button className="px-9 py-4 bg-[#3B4A3D] text-[#FAF8F5] rounded-xl font-bold hover:bg-[#2D382E] transition-all duration-300 flex items-center gap-3 group tracking-wider text-xs uppercase shadow-lg shadow-[#3B4A3D]/15">
+            <Link to="/shop" className="px-9 py-4 bg-[#3B4A3D] text-[#FAF8F5] rounded-xl font-bold hover:bg-[#2D382E] transition-all duration-300 flex items-center gap-3 group tracking-wider text-xs uppercase shadow-lg shadow-[#3B4A3D]/15">
               SHOP NOW <ArrowRight size={15} className="group-hover:translate-x-1.5 transition-transform duration-300" />
-            </button>
-            <button className="px-7 py-4 bg-transparent text-[#2C241E] font-bold hover:bg-black/5 rounded-xl transition-all duration-300 tracking-wider text-xs uppercase border border-[#2C241E]/20">
+            </Link>
+            <Link to="/shop" className="px-7 py-4 bg-transparent text-[#2C241E] font-bold hover:bg-black/5 rounded-xl transition-all duration-300 tracking-wider text-xs uppercase border border-[#2C241E]/20">
               EXPLORE FLAVOURS
-            </button>
+            </Link>
           </motion.div>
         </motion.div>
 

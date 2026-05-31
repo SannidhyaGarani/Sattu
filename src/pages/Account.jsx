@@ -75,45 +75,50 @@ const Account = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#F3ECE1] flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#4A5D4E]"></div>
+      <div className="min-h-screen bg-[#FDFBF7] flex items-center justify-center">
+        <div className="relative w-10 h-10">
+          <div className="absolute inset-0 border-2 border-[#1C3B24]/10 rounded-full" />
+          <div className="absolute inset-0 border-2 border-t-[#1C3B24] rounded-full animate-spin" />
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#F3ECE1] pt-32 pb-20 px-6">
-      <div className="max-w-[1440px] mx-auto">
+    <div className="min-h-screen bg-[#FDFBF7] text-[#1C2B21] pt-32 pb-24 px-6 md:px-12 lg:px-16 selection:bg-[#1C3B24] selection:text-white">
+      <div className="max-w-[1320px] mx-auto">
         
-        {/* Profile Header Card */}
-        <div className="bg-[#4A5D4E] rounded-[48px] p-8 md:p-16 mb-12 relative overflow-hidden shadow-2xl shadow-[#4A5D4E]/20">
-          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#FDFBF7]/10 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3" />
+        {/* PREMIUM ACCOUNT HEADER MARQUEE */}
+        <div className="bg-[#1C3B24] rounded-3xl p-8 md:p-14 mb-16 relative overflow-hidden shadow-[0_12px_40px_rgba(28,59,36,0.08)]">
+          {/* Spatial Vector Accents */}
+          <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:24px_24px]" />
+          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#D9A036]/10 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/3" />
           
-          <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-12">
-            <div className="flex flex-col md:flex-row items-center gap-8">
-              <div className="relative group">
-                <div className="w-32 h-32 rounded-[40px] bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white overflow-hidden">
+          <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
+            <div className="flex flex-col md:flex-row items-center gap-6 text-center md:text-left">
+              <div className="relative">
+                <div className="w-24 h-24 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 flex items-center justify-center text-[#EFECE6] overflow-hidden p-1">
                   {userData?.photoURL ? (
-                    <img src={userData.photoURL} alt="Profile" className="w-full h-full object-cover" />
+                    <img src={userData.photoURL} alt="Profile" className="w-full h-full object-cover rounded-xl" />
                   ) : (
-                    <User size={56} className="text-white/40" />
+                    <User size={36} strokeWidth={1.2} className="text-[#EFECE6]/40" />
                   )}
                 </div>
-                <div className="absolute -bottom-2 -right-2 w-10 h-10 bg-[#6D4C3D] rounded-2xl flex items-center justify-center text-white border-4 border-[#4A5D4E] shadow-lg">
-                  <Award size={18} />
+                <div className="absolute -bottom-1.5 -right-1.5 w-7 h-7 bg-[#9A8F80] rounded-lg flex items-center justify-center text-white border-2 border-[#1C3B24] shadow-md">
+                  <Award size={13} strokeWidth={1.5} />
                 </div>
               </div>
               
-              <div className="text-center md:text-left space-y-2">
-                <h1 className="text-4xl md:text-5xl font-serif italic text-white tracking-tight">
-                  {userData?.displayName || "Sattu Member"}
+              <div className="space-y-1.5">
+                <h1 className="text-3xl font-serif font-light text-[#EFECE6] tracking-tight">
+                  {userData?.displayName || "Registry Member"}
                 </h1>
-                <p className="text-white/60 font-medium text-lg">{user?.email}</p>
-                <div className="flex flex-wrap justify-center md:justify-start gap-3 mt-4">
-                  <span className="px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-sm text-white text-[10px] font-black uppercase tracking-widest border border-white/10">
-                    Elite Status
+                <p className="text-xs text-[#EFECE6]/60 font-light tracking-wide">{user?.email}</p>
+                <div className="flex flex-wrap justify-center md:justify-start gap-2 pt-1">
+                  <span className="px-3 py-1 rounded-md bg-white/5 border border-white/10 text-[#EFECE6] text-[8px] font-bold uppercase tracking-widest">
+                    Elite Tier Allocation
                   </span>
-                  <span className="px-4 py-1.5 rounded-full bg-[#6D4C3D]/40 text-white text-[10px] font-black uppercase tracking-widest border border-[#6D4C3D]/20">
+                  <span className="px-3 py-1 rounded-md bg-white/5 border border-white/10 text-[#D9A036] text-[8px] font-bold uppercase tracking-widest">
                     2,450 Vitality Points
                   </span>
                 </div>
@@ -122,91 +127,98 @@ const Account = () => {
 
             <button
               onClick={handleLogout}
-              className="px-8 py-4 rounded-2xl bg-[#FDFBF7] text-[#4A5D4E] font-black hover:bg-red-50 hover:text-red-600 transition-all shadow-xl shadow-black/10 flex items-center gap-3"
+              className="h-11 px-6 rounded-xl bg-[#EFECE6] text-[#1C3B24] font-bold text-[9px] uppercase tracking-[0.2em] hover:bg-red-50 hover:text-red-600 transition-all duration-300 flex items-center gap-2.5 shadow-sm"
             >
-              <LogOut size={20} />
-              Logout Account
+              <LogOut size={13} strokeWidth={1.5} />
+              <span>Terminate Session</span>
             </button>
           </div>
         </div>
 
-        <div className="grid lg:grid-cols-12 gap-12">
+        {/* WORKSPACE CONTENT SPLIT GRID */}
+        <div className="grid lg:grid-cols-12 gap-16 items-start">
           
-          {/* Left Column: Stats & Menu */}
-          <div className="lg:col-span-4 space-y-8">
-            {/* Stats Grid */}
-            <div className="grid grid-cols-2 gap-6">
-              <Link to="/cart" className="group bg-[#FDFBF7] p-8 rounded-[40px] border border-[#E6DDC4]/40 shadow-sm hover:shadow-[0_20px_50px_rgba(74,93,78,0.05)] transition-all">
-                <div className="w-14 h-14 rounded-2xl bg-[#4A5D4E]/10 flex items-center justify-center text-[#4A5D4E] mb-6 group-hover:scale-110 transition-transform">
-                  <ShoppingBag size={28} />
+          {/* LEFT RUNWAY: DASHBOARD ROUTING MATRIX */}
+          <div className="lg:col-span-4 space-y-10">
+            {/* Minimal Stat Metric Tiles */}
+            <div className="grid grid-cols-2 gap-4">
+              <Link to="/cart" className="group bg-white p-6 rounded-2xl border border-[#EAE6DF] hover:border-[#1C3B24] transition-all duration-300 shadow-[0_4px_20px_rgba(0,0,0,0.01)]">
+                <div className="w-10 h-10 rounded-xl bg-[#F9F8F6] flex items-center justify-center text-[#1C3B24] mb-4 group-hover:bg-[#1C3B24] group-hover:text-white transition-all duration-300">
+                  <ShoppingBag size={16} strokeWidth={1.5} />
                 </div>
-                <p className="text-4xl font-black text-[#2D231D] tracking-tighter">{stats.cart}</p>
-                <p className="text-xs font-black text-[#4A5D4E]/40 uppercase tracking-[0.2em] mt-2">In Cart</p>
+                <p className="text-2xl font-serif font-light text-[#1C2B21]">{stats.cart}</p>
+                <p className="text-[9px] font-bold text-[#9A8F80] uppercase tracking-widest mt-1">Manifest Cart</p>
               </Link>
               
-              <Link to="/wishlist" className="group bg-[#FDFBF7] p-8 rounded-[40px] border border-[#E6DDC4]/40 shadow-sm hover:shadow-[0_20px_50px_rgba(74,93,78,0.05)] transition-all">
-                <div className="w-14 h-14 rounded-2xl bg-[#4A5D4E]/10 flex items-center justify-center text-[#4A5D4E] mb-6 group-hover:scale-110 transition-transform">
-                  <Heart size={28} fill="currentColor" />
+              <Link to="/wishlist" className="group bg-white p-6 rounded-2xl border border-[#EAE6DF] hover:border-[#1C3B24] transition-all duration-300 shadow-[0_4px_20px_rgba(0,0,0,0.01)]">
+                <div className="w-10 h-10 rounded-xl bg-[#F9F8F6] flex items-center justify-center text-[#1C3B24] mb-4 group-hover:bg-[#1C3B24] group-hover:text-white transition-all duration-300">
+                  <Heart size={16} strokeWidth={1.5} />
                 </div>
-                <p className="text-4xl font-black text-[#2D231D] tracking-tighter">{stats.wishlist}</p>
-                <p className="text-xs font-black text-[#4A5D4E]/40 uppercase tracking-[0.2em] mt-2">Saved</p>
+                <p className="text-2xl font-serif font-light text-[#1C2B21]">{stats.wishlist}</p>
+                <p className="text-[9px] font-bold text-[#9A8F80] uppercase tracking-widest mt-1">Saved Curations</p>
               </Link>
             </div>
 
-            {/* Navigation Menu */}
-            <div className="bg-[#FDFBF7] rounded-[48px] border border-[#E6DDC4]/40 shadow-sm overflow-hidden p-4">
-              <h3 className="px-6 py-4 text-xs font-black text-[#4A5D4E]/30 uppercase tracking-[0.3em]">Account Management</h3>
-              <div className="space-y-1">
+            {/* Structured Navigation Panel */}
+            <div className="bg-white rounded-2xl border border-[#EAE6DF] p-2 shadow-[0_4px_20px_rgba(0,0,0,0.01)]">
+              <span className="block px-4 py-3 text-[9px] font-bold text-[#9A8F80] uppercase tracking-[0.25em]">
+                Registry Management
+              </span>
+              <div className="space-y-0.5">
                 {[
-                  { icon: Settings, label: "Profile Settings", color: "text-[#4A5D4E]", bg: "bg-[#4A5D4E]/5" },
-                  { icon: Package, label: "Order History", color: "text-[#4A5D4E]", bg: "bg-[#4A5D4E]/5" },
-                  { icon: CreditCard, label: "Payment Methods", color: "text-[#4A5D4E]", bg: "bg-[#4A5D4E]/5" },
-                  { icon: MapPin, label: "Saved Addresses", color: "text-[#4A5D4E]", bg: "bg-[#4A5D4E]/5" },
-                  { icon: Bell, label: "Notifications", color: "text-[#4A5D4E]", bg: "bg-[#4A5D4E]/5" },
+                  { icon: Settings, label: "Identity Parameters" },
+                  { icon: Package, label: "Consignment Logs" },
+                  { icon: CreditCard, label: "Settlement Frameworks" },
+                  { icon: MapPin, label: "Distribution Endpoints" },
+                  { icon: Bell, label: "Transmission Directives" },
                 ].map((item, idx) => (
-                  <button key={idx} className="w-full flex items-center justify-between p-5 rounded-3xl hover:bg-white/50 transition-all group text-left">
-                    <div className="flex items-center gap-4">
-                      <div className={`w-10 h-10 rounded-xl ${item.bg} ${item.color} flex items-center justify-center`}>
-                        <item.icon size={20} />
+                  <button key={idx} className="w-full flex items-center justify-between p-3.5 rounded-xl hover:bg-[#F9F8F6] transition-all group text-left">
+                    <div className="flex items-center gap-3.5">
+                      <div className="w-8 h-8 rounded-lg bg-[#F9F8F6] text-[#1C3B24] flex items-center justify-center group-hover:bg-white group-hover:text-[#D9A036] transition-colors">
+                        <item.icon size={14} strokeWidth={1.5} />
                       </div>
-                      <span className="font-black text-[#2D231D]">{item.label}</span>
+                      <span className="text-xs font-medium text-[#1C2B21] group-hover:text-[#1C3B24] transition-colors">{item.label}</span>
                     </div>
-                    <ChevronRight size={18} className="text-[#4A5D4E]/20 group-hover:translate-x-1 transition-transform" />
+                    <ChevronRight size={13} strokeWidth={1.5} className="text-[#9A8F80]/40 group-hover:translate-x-0.5 transition-transform" />
                   </button>
                 ))}
               </div>
             </div>
           </div>
 
-          {/* Right Column: Recent Activity */}
-          <div className="lg:col-span-8 space-y-12">
-            <div className="bg-[#FDFBF7] rounded-[56px] border border-[#E6DDC4]/40 shadow-sm p-10 md:p-14">
-              <div className="flex items-center justify-between mb-12">
-                <div>
-                  <h3 className="text-3xl font-serif italic text-[#2D231D] tracking-tight">Recent Orders</h3>
-                  <p className="text-[#5A5047] font-medium mt-1">Tracking your latest natural energy essentials.</p>
+          {/* RIGHT RUNWAY: LEDGER RECORDS AREA */}
+          <div className="lg:col-span-8 space-y-10">
+            <div className="bg-white rounded-2xl border border-[#EAE6DF] p-8 md:p-10 shadow-[0_4px_30px_rgba(0,0,0,0.01)]">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-10 pb-6 border-b border-[#EAE6DF]">
+                <div className="space-y-1">
+                  <h3 className="text-2xl font-serif font-light text-[#1C2B21]">Recent Consignments</h3>
+                  <p className="text-xs text-[#707A72] font-light">Trace historical data logs on personal nutritional allocations.</p>
                 </div>
-                <Link to="/orders" className="px-6 py-3 rounded-2xl border border-[#E6DDC4]/40 text-xs font-black text-[#4A5D4E] uppercase tracking-widest hover:bg-[#4A5D4E] hover:text-white transition-all">
-                  View All
+                <Link to="/orders" className="self-start sm:self-center h-9 px-5 border border-[#EAE6DF] rounded-xl text-[9px] font-bold text-[#1C3B24] uppercase tracking-widest hover:border-[#1C3B24] hover:bg-[#1C3B24] hover:text-[#EFECE6] transition-all flex items-center">
+                  Archive Ledger
                 </Link>
               </div>
 
               {recentOrders.length > 0 ? (
-                <div className="space-y-6">
+                <div className="divide-y divide-[#EAE6DF]">
                   {recentOrders.map((order) => (
-                    <div key={order.id} className="group flex flex-col sm:flex-row items-center justify-between p-8 rounded-[40px] bg-white/30 border border-transparent hover:border-[#4A5D4E]/20 hover:bg-white transition-all duration-500">
-                      <div className="flex items-center gap-6 mb-4 sm:mb-0">
-                        <div className="w-16 h-16 rounded-[24px] bg-[#FDFBF7] flex items-center justify-center text-[#4A5D4E] border border-[#E6DDC4]/40 shadow-sm group-hover:scale-110 transition-transform">
-                          <Package size={28} />
+                    <div key={order.id} className="group py-6 first:pt-0 last:pb-0 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                      <div className="flex items-center gap-5">
+                        <div className="w-12 h-12 rounded-xl bg-[#F9F8F6] flex items-center justify-center text-[#1C3B24] border border-[#EAE6DF]">
+                          <Package size={18} strokeWidth={1.5} />
                         </div>
-                        <div>
-                          <p className="text-lg font-black text-[#2D231D]">Order #{order.id.slice(0, 8)}</p>
-                          <p className="text-sm text-[#5A5047] font-bold uppercase tracking-widest">{order.createdAt?.toDate().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</p>
+                        <div className="space-y-0.5">
+                          <p className="text-sm font-medium text-[#1C2B21] group-hover:text-[#1C3B24] transition-colors">
+                            Allocation #{order.id.slice(0, 8).toUpperCase()}
+                          </p>
+                          <p className="text-[10px] text-[#9A8F80] font-light tracking-wide uppercase">
+                            {order.createdAt?.toDate().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+                          </p>
                         </div>
                       </div>
-                      <div className="text-center sm:text-right space-y-2">
-                        <p className="text-3xl font-black text-[#2D231D] tracking-tighter">${order.total}</p>
-                        <span className="inline-flex px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest bg-emerald-50 text-emerald-600 border border-emerald-100">
+                      <div className="w-full sm:w-auto flex sm:flex-col justify-between sm:items-end items-center gap-1.5">
+                        <p className="text-lg font-serif font-light text-[#1C2B21] font-mono">${order.total}</p>
+                        <span className="inline-flex px-2.5 py-0.5 rounded text-[8px] font-bold uppercase tracking-widest bg-emerald-50 text-emerald-700 border border-emerald-100">
                           {order.status}
                         </span>
                       </div>
@@ -214,30 +226,32 @@ const Account = () => {
                   ))}
                 </div>
               ) : (
-                <div className="text-center py-24 bg-white/30 rounded-[48px] border border-dashed border-[#E6DDC4]/40">
-                  <div className="w-24 h-24 rounded-[32px] bg-[#FDFBF7] flex items-center justify-center text-[#4A5D4E]/10 mx-auto mb-8 shadow-sm">
-                    <ShoppingBag size={48} />
+                <div className="text-center py-20 border border-dashed border-[#EAE6DF] rounded-xl space-y-6">
+                  <div className="w-16 h-16 rounded-2xl bg-[#F9F8F6] border border-[#EAE6DF] flex items-center justify-center text-[#9A8F80]/40 mx-auto">
+                    <ShoppingBag size={24} strokeWidth={1.5} />
                   </div>
-                  <h4 className="text-2xl font-serif italic text-[#2D231D] mb-2">No orders yet</h4>
-                  <p className="text-[#5A5047] font-medium mb-10 max-w-xs mx-auto">Your journey to wellness begins with your first selection.</p>
-                  <Link to="/shop" className="inline-flex items-center gap-3 px-10 py-5 bg-[#4A5D4E] text-white rounded-[24px] font-black hover:bg-[#2D231D] transition-all shadow-xl shadow-[#4A5D4E]/20">
-                    Explore Collection
-                    <ChevronRight size={20} />
+                  <div className="space-y-1">
+                    <h4 className="text-lg font-serif font-light text-[#1C2B21]">Manifest Clear</h4>
+                    <p className="text-xs text-[#707A72] font-light max-w-xs mx-auto">Your entry file lists no active dispatches at this current timestamp.</p>
+                  </div>
+                  <Link to="/shop" className="inline-flex items-center gap-2 h-11 px-8 bg-[#1C3B24] text-[#EFECE6] font-bold text-[9px] uppercase tracking-[0.25em] rounded-xl hover:bg-[#1C2B21] transition-all">
+                    <span>Initialize Curation</span>
+                    <ChevronRight size={12} strokeWidth={1.5} />
                   </Link>
                 </div>
               )}
             </div>
 
-            {/* Loyalty Banner */}
-            <div className="bg-[#6D4C3D] rounded-[48px] p-10 md:p-14 text-white relative overflow-hidden shadow-2xl shadow-[#6D4C3D]/20">
-              <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2" />
-              <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
-                <div className="text-center md:text-left">
-                  <h3 className="text-3xl font-serif italic tracking-tight mb-2">Sattu Rewards</h3>
-                  <p className="text-white/80 font-medium">You're only 550 points away from your next natural gift.</p>
+            {/* CURATED REWARDS SUB-BANNER */}
+            <div className="bg-[#9A8F80] rounded-2xl p-8 text-[#EFECE6] relative overflow-hidden shadow-sm">
+              <div className="absolute top-0 right-0 w-48 h-48 bg-white/5 rounded-full blur-[40px] -translate-y-1/2 translate-x-1/2" />
+              <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
+                <div className="text-center md:text-left space-y-1">
+                  <h3 className="text-xl font-serif font-light tracking-wide">House Premium Dividend</h3>
+                  <p className="text-xs text-[#EFECE6]/80 font-light">You accumulate parameters at a baseline margin of 550 points from your complimentary reserve.</p>
                 </div>
-                <button className="px-10 py-5 bg-[#4A5D4E] text-white rounded-[24px] font-black hover:bg-white hover:text-[#4A5D4E] transition-all shadow-xl shadow-black/10">
-                  Redeem Points
+                <button className="h-11 px-6 bg-[#1C3B24] text-[#EFECE6] rounded-xl font-bold text-[9px] uppercase tracking-[0.2em] hover:bg-[#1C2B21] transition-all duration-300 shrink-0">
+                  Execute Dividend
                 </button>
               </div>
             </div>

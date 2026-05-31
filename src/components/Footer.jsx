@@ -1,127 +1,195 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import { Leaf, Instagram, Facebook, Twitter, Youtube, ArrowRight, Phone, Mail, MapPin } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { 
+  Leaf, Instagram, Facebook, Twitter, Youtube, 
+  ArrowRight, Phone, Mail, MapPin, Truck, 
+  ShieldCheck, Zap, Clock, TrendingUp, ChevronUp 
+} from 'lucide-react';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-brand-cream pt-24 pb-12 overflow-hidden relative border-t border-brand-olive/5">
+    <footer className="bg-[#EFECE6] pt-24 lg:pt-28 pb-12 overflow-hidden border-t border-[#D9D3C7] tracking-normal">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-20">
-          
-          {/* Brand Column */}
-          <div className="flex flex-col gap-6">
-            <Link to="/" className="flex items-center gap-2">
-              <div className="w-10 h-10 bg-brand-olive rounded-full flex items-center justify-center text-brand-cream">
-                <Leaf size={24} />
-              </div>
-              <div className="flex flex-col -space-y-1">
-                <span className="text-2xl font-bold tracking-tighter text-brand-olive">SATTU</span>
-                <span className="text-[10px] tracking-[0.3em] font-light text-brand-brown">DRINK</span>
-              </div>
-            </Link>
-            <p className="text-brand-olive/60 leading-relaxed text-sm">
-              Bringing the power of tradition in a modern form. 100% natural, healthy & delicious energy booster for the modern Indian lifestyle.
-            </p>
-            <div className="flex gap-4">
-              {[Instagram, Facebook, Twitter, Youtube].map((Icon, i) => (
-                <motion.a 
-                  key={i}
-                  href="#"
-                  whileHover={{ y: -3, scale: 1.1 }}
-                  className="w-10 h-10 rounded-full bg-brand-olive/5 flex items-center justify-center text-brand-olive hover:bg-brand-olive hover:text-brand-cream transition-all duration-300"
-                >
-                  <Icon size={18} />
-                </motion.a>
-              ))}
+        
+        {/* ================= USER BENEFIT STRIP ================= */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-y-10 gap-x-12 pb-16 border-b border-[#D9D3C7]/80 mb-20">
+          <div className="flex items-start gap-4 group">
+            <div className="p-3 rounded-xl bg-white text-[#1C3B24] shadow-sm border border-[#D9D3C7]/40">
+              <Truck size={20} strokeWidth={1.25} />
+            </div>
+            <div>
+              <h4 className="text-sm font-serif font-semibold text-[#1C2B21] tracking-wide">Complimentary Shipping</h4>
+              <p className="text-xs font-sans text-[#707A72] mt-1 leading-relaxed">On all curated orders above ₹499</p>
             </div>
           </div>
 
-          {/* Quick Links */}
-          <div className="flex flex-col gap-6">
-            <h4 className="text-brand-olive font-bold uppercase tracking-widest text-xs">Quick Links</h4>
-            <div className="flex flex-col gap-4">
-              {['Home', 'Shop', 'Flavours', 'Benefits', 'How to Make', 'Reviews', 'About Us'].map((item) => (
-                <Link 
-                  key={item} 
-                  to={item === 'Home' ? '/' : `/${item.toLowerCase().replace(/\s+/g, '-')}`}
-                  className="text-brand-olive/60 hover:text-brand-olive transition-colors text-sm font-medium w-fit"
-                >
-                  {item}
-                </Link>
-              ))}
+          <div className="flex items-start gap-4 group">
+            <div className="p-3 rounded-xl bg-white text-[#1C3B24] shadow-sm border border-[#D9D3C7]/40">
+              <TrendingUp size={20} strokeWidth={1.25} />
+            </div>
+            <div>
+              <h4 className="text-sm font-serif font-semibold text-[#1C2B21] tracking-wide">Expedited Priority Delivery</h4>
+              <p className="text-xs font-sans text-[#707A72] mt-1 leading-relaxed">Arriving at your doorstep within 3-5 days</p>
             </div>
           </div>
 
-          {/* Customer Care */}
-          <div className="flex flex-col gap-6">
-            <h4 className="text-brand-olive font-bold uppercase tracking-widest text-xs">Customer Care</h4>
-            <div className="flex flex-col gap-4">
-              {['My Account', 'Track Order', 'Shipping Policy', 'Return & Refund', 'Terms & Conditions', 'Privacy Policy', 'FAQ'].map((item) => (
-                <Link 
-                  key={item} 
-                  to={`/${item.toLowerCase().replace(/\s+/g, '-')}`}
-                  className="text-brand-olive/60 hover:text-brand-olive transition-colors text-sm font-medium w-fit"
-                >
-                  {item}
-                </Link>
-              ))}
+          <div className="flex items-start gap-4 group">
+            <div className="p-3 rounded-xl bg-white text-[#1C3B24] shadow-sm border border-[#D9D3C7]/40">
+              <ShieldCheck size={20} strokeWidth={1.25} />
+            </div>
+            <div>
+              <h4 className="text-sm font-serif font-semibold text-[#1C2B21] tracking-wide">Encrypted Checkout</h4>
+              <p className="text-xs font-sans text-[#707A72] mt-1 leading-relaxed">Secure transaction handling via UPI, Cards, & COD</p>
             </div>
           </div>
 
-          {/* Newsletter / Contact */}
-          <div className="flex flex-col gap-6">
-            <h4 className="text-brand-olive font-bold uppercase tracking-widest text-xs font-black">Stay Healthy</h4>
-            <p className="text-sm text-brand-olive/60">Join our community for regular health tips and natural wellness hacks.</p>
-            <div className="relative">
-              <input 
-                type="email" 
-                placeholder="Enter your email"
-                className="w-full bg-white border border-brand-olive/10 rounded-full py-4 pl-6 pr-16 text-sm focus:outline-none focus:border-brand-olive/30 transition-all shadow-sm"
-              />
-              <button className="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 bg-brand-olive text-brand-cream rounded-full flex items-center justify-center hover:bg-brand-olive-light transition-all">
-                <ArrowRight size={18} />
-              </button>
+          <div className="flex items-start gap-4 group">
+            <div className="p-3 rounded-xl bg-white text-[#1C3B24] shadow-sm border border-[#D9D3C7]/40">
+              <Zap size={20} strokeWidth={1.25} />
             </div>
-            
-            <div className="flex flex-col gap-3 pt-4 border-t border-brand-olive/10">
-              <div className="flex items-center gap-3 text-brand-olive/70 text-sm">
-                <Phone size={16} className="text-brand-olive" />
-                <span>+91 98765 43210</span>
-              </div>
-              <div className="flex items-center gap-3 text-brand-olive/70 text-sm">
-                <Mail size={16} className="text-brand-olive" />
-                <span>hello@sattudrink.com</span>
-              </div>
+            <div>
+              <h4 className="text-sm font-serif font-semibold text-[#1C2B21] tracking-wide">100% Pure, Native Wellness</h4>
+              <p className="text-xs font-sans text-[#707A72] mt-1 leading-relaxed">Zero processed elements, chemicals or additives</p>
             </div>
           </div>
         </div>
 
-        {/* Bottom Footer */}
-        <div className="pt-8 border-t border-brand-olive/10 flex flex-col md:flex-row justify-between items-center gap-8">
-          <p className="text-brand-olive/40 text-[10px] uppercase font-bold tracking-widest">
-            © {currentYear} Sattu Drink. All Rights Reserved.
+        {/* ================= MAIN ASYMMETRIC MATRICES ================= */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-y-16 gap-x-16 lg:gap-x-24 mb-20">
+          
+          {/* LEFT SIDE: Brand & Structured Navigation Ecosystem (7 Columns) */}
+          <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-3 gap-x-12 gap-y-12">
+            
+            {/* Column 1: Brand Pitch */}
+            <div className="flex flex-col gap-6 sm:col-span-1">
+              <Link to="/" className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-[#1C3B24] rounded-xl flex items-center justify-center p-2.5 shadow-sm">
+                  <Leaf className="text-[#D9A036] w-full h-full" strokeWidth={1.5} />
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-xl font-serif font-bold tracking-tight text-[#1C2B21]">SATTU</span>
+                  <span className="text-[9px] tracking-[0.25em] font-sans font-bold text-[#D9A036] uppercase">
+                    Pure Wellness
+                  </span>
+                </div>
+              </Link>
+              <p className="text-[#3E4A41] font-sans text-[13px] leading-relaxed opacity-90">
+                Honoring traditional Indian raw nutrition through highly refined whole foods engineered for today’s active routines.
+              </p>
+              <div className="flex gap-5 mt-2">
+                {[Instagram, Facebook, Youtube, Twitter].map((Icon, i) => (
+                  <a key={i} href="#" className="text-[#1C3B24]/70 hover:text-[#D9A036] transition-colors duration-300">
+                    <Icon size={18} strokeWidth={1.5} />
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            {/* Column 2: Discover Links */}
+            <div>
+              <h4 className="text-[#1C2B21] font-sans font-semibold text-xs uppercase tracking-[0.2em] mb-6">Ecosystem</h4>
+              <div className="flex flex-col gap-3.5">
+                {['Home', 'Shop Flavours', 'Product Benefits', 'How to Formulation', 'Verified Reviews', 'Contact Portfolio'].map((item) => (
+                  <Link key={item} to="#" className="text-[#4A574E] hover:text-[#1C3B24] font-sans text-[13px] transition-colors duration-200 group flex items-center gap-0 hover:gap-1">
+                    <span className="transition-all">{item}</span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            {/* Column 3: Corporate/Care Links */}
+            <div>
+              <h4 className="text-[#1C2B21] font-sans font-semibold text-xs uppercase tracking-[0.2em] mb-6">Client Services</h4>
+              <div className="flex flex-col gap-3.5">
+                {['My Account Control', 'Track Realtime Order', 'Shipping Logistics', 'Returns & Exchanges', 'Terms of Service', 'Privacy Charter'].map((item) => (
+                  <Link key={item} to="#" className="text-[#4A574E] hover:text-[#1C3B24] font-sans text-[13px] transition-colors duration-200">
+                    {item}
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+          </div>
+
+          {/* RIGHT SIDE: Connected Newsletter & Concierge Row (5 Columns) */}
+          <div className="lg:col-span-5 bg-white/40 border border-[#D9D3C7]/60 rounded-2xl p-8 lg:p-10 flex flex-col justify-between shadow-sm">
+            
+            {/* Top Subrow: Editorial Newsletter */}
+            <div className="mb-8">
+              <h4 className="text-[#1C2B21] font-serif font-bold text-lg lg:text-xl tracking-tight mb-2">Join the Wellness Circle</h4>
+              <p className="text-[13px] text-[#4A574E] mb-6 leading-relaxed font-sans">
+                Subscribe to unlock early batches, seasonal flavor reserves, and curated nutritional strategies.
+              </p>
+              
+              <div className="flex items-center bg-white border border-[#D9D3C7] rounded-xl p-1.5 shadow-sm focus-within:border-[#1C3B24] focus-within:ring-1 focus-within:ring-[#1C3B24]/20 transition-all">
+                <input 
+                  type="email" 
+                  placeholder="Enter your email address" 
+                  className="w-full text-sm px-3 py-2 bg-transparent focus:outline-none text-[#1C2B21] placeholder-[#707A72]/70 font-sans" 
+                />
+                <button className="bg-[#1C3B24] text-white px-5 py-2.5 font-sans font-medium text-xs tracking-wider uppercase rounded-lg hover:bg-[#112517] transition-all duration-300 flex items-center gap-2 flex-shrink-0">
+                  <span>Join</span>
+                  <ArrowRight size={13} strokeWidth={2} />
+                </button>
+              </div>
+            </div>
+
+            {/* Bottom Subrow: Concierge Contact Details */}
+            <div className="pt-8 border-t border-[#D9D3C7]/60 grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div className="flex flex-col gap-3">
+                <span className="text-[10px] font-sans font-bold uppercase tracking-[0.15em] text-[#D9A036]">Direct Lines</span>
+                <a href="tel:+919876543210" className="flex items-center gap-2.5 text-xs font-semibold font-sans text-[#1C2B21] hover:text-[#D9A036] transition-colors">
+                  <Phone size={13} className="text-[#1C3B24]" strokeWidth={2} />
+                  <span>+91 98765 43210</span>
+                </a>
+                <a href="mailto:hello@sattudrink.com" className="flex items-center gap-2.5 text-xs font-sans text-[#4A574E] hover:text-[#1C3B24] transition-colors">
+                  <Mail size={13} className="text-[#1C3B24]" strokeWidth={1.5} />
+                  <span>hello@sattudrink.com</span>
+                </a>
+              </div>
+
+              <div className="flex flex-col gap-3">
+                <span className="text-[10px] font-sans font-bold uppercase tracking-[0.15em] text-[#D9A036]">HQ & Hours</span>
+                <div className="flex items-center gap-2.5 text-xs font-sans text-[#4A574E]">
+                  <MapPin size={13} className="text-[#1C3B24]" strokeWidth={1.5} />
+                  <span>Bihar, India</span>
+                </div>
+                <div className="flex items-center gap-2.5 text-xs font-sans text-[#4A574E]">
+                  <Clock size={13} className="text-[#1C3B24]" strokeWidth={1.5} />
+                  <span>Mon - Sat: 9 AM - 7 PM</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        {/* ================= BOTTOM LEGAL CREDITS BLOCK ================= */}
+        <div className="pt-8 border-t border-[#D9D3C7] flex flex-col md:flex-row justify-between items-center gap-8">
+          <p className="text-[#707A72] font-sans text-xs order-2 md:order-1">
+            © {currentYear} Sattu Drink. Executed with premium native integrity. All Rights Reserved.
           </p>
           
-          <div className="flex items-center gap-6 grayscale opacity-50">
-             <div className="flex gap-4">
-                <span className="text-[10px] font-bold">UPI</span>
-                <span className="text-[10px] font-bold">VISA</span>
-                <span className="text-[10px] font-bold">RUPAY</span>
-                <span className="text-[10px] font-bold">COD</span>
-             </div>
+          {/* Grayscale Premium Payment Gateway Vectors */}
+          <div className="flex items-center gap-6 order-1 md:order-2">
+             <img src="https://upload.wikimedia.org/wikipedia/commons/e/e1/UPI-Logo-vector.svg" alt="UPI" className="h-4 grayscale opacity-30 hover:opacity-90 transition-all duration-300 cursor-pointer" />
+             <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="VISA" className="h-3 grayscale opacity-30 hover:opacity-90 transition-all duration-300 cursor-pointer" />
+             <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" className="h-4.5 grayscale opacity-30 hover:opacity-90 transition-all duration-300 cursor-pointer" />
+             <img src="https://upload.wikimedia.org/wikipedia/commons/c/cb/Rupay-Logo.svg" alt="RuPay" className="h-4 grayscale opacity-30 hover:opacity-90 transition-all duration-300 cursor-pointer" />
           </div>
 
-          <motion.button 
-            whileHover={{ y: -5 }}
+          <button 
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="w-10 h-10 bg-brand-olive/5 text-brand-olive rounded-full flex items-center justify-center hover:bg-brand-olive hover:text-brand-cream transition-all"
+            className="w-10 h-10 bg-white border border-[#D9D3C7] text-[#1C3B24] rounded-full flex items-center justify-center hover:bg-[#1C3B24] hover:text-white transition-all duration-300 shadow-sm hover:shadow-md order-3"
+            aria-label="Scroll back to top"
           >
-            <ArrowRight size={20} className="-rotate-90" />
-          </motion.button>
+            <ChevronUp size={18} strokeWidth={1.5} />
+          </button>
         </div>
+
       </div>
     </footer>
   );

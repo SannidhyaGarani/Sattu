@@ -1,71 +1,167 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ShoppingBag, ArrowRight } from 'lucide-react';
+import { Leaf, Heart, Users, Sparkles, GlassWater, Zap, CheckCircle2, Globe2 } from 'lucide-react';
 
-const OfferBanner = () => {
+const SattuStorySection = () => {
   return (
-    <section className="py-16 px-6 md:px-12 bg-[#FDFBF7]">
-      <div className="max-w-7xl mx-auto rounded-3xl overflow-hidden relative min-h-[400px] flex items-center bg-[#E6DDC4]/40">
-        <div className="container mx-auto px-12 lg:px-20 grid grid-cols-1 lg:grid-cols-2 items-center gap-12 relative z-10 py-12">
+    <div className="w-full max-w-7xl mx-auto font-sans overflow-hidden bg-[#EFECE6] border border-[#D9D3C7] rounded-2xl shadow-xl shadow-stone-900/5 my-12">
+      
+      {/* MAIN RUSTIC HERITAGE GRID */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 w-full">
+        
+        {/* Column 1: Farmer Image Background */}
+        <div className="relative h-72 md:h-96 lg:h-auto group overflow-hidden border-b md:border-b-0 md:border-r border-[#D9D3C7]">
+          <div 
+            className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
+            style={{ 
+              backgroundImage: `url('https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=800&auto=format&fit=crop&q=80')` 
+            }}
+          />
+          {/* Elegant warm editorial gradient scrim */}
+          <div className="absolute inset-0 bg-gradient-to-t from-amber-950/40 via-amber-900/10 to-transparent mix-blend-multiply"></div>
+        </div>
+
+        {/* Column 2: Our Story Editorial Typography Block */}
+        <div className="bg-[#EFECE6] p-8 lg:p-10 xl:p-12 flex flex-col justify-center border-b lg:border-b-0 lg:border-r border-[#D9D3C7] relative">
+          {/* Subtle tactile premium geometric overlay */}
+          <div className="absolute inset-0 opacity-[0.02] pointer-events-none bg-[radial-gradient(#000_1px,transparent_1px)] [background-size:20px_20px]"></div>
           
-          {/* Content */}
-          <div className="text-center lg:text-left flex flex-col items-center lg:items-start gap-4">
-            <span className="text-[#333333] text-xs font-bold uppercase tracking-[0.2em]">Limited Time Offer</span>
-            
-            <h2 className="text-5xl md:text-6xl font-bold text-[#333333] leading-tight">
-              BUY 2 GET <span className="text-[#4A5D4E]">1 FREE</span>
+          <div className="relative z-10">
+            <span className="text-[#D9A036] font-sans font-bold text-xs uppercase tracking-widest mb-3 block">
+              Our Legacy
+            </span>
+            <h2 className="text-[#1C2B21] font-serif font-bold text-3xl lg:text-4xl leading-[1.15] mb-6 tracking-tight">
+              From Our Roots <br />
+              <span className="italic font-normal text-[#3E4A41]">To Your Glass</span>
             </h2>
-            
-            <p className="text-[#666666] text-sm font-medium">
-              Hurry! Offer valid on all flavours.
+            <p className="text-[#3E4A41] text-sm lg:text-base leading-relaxed mb-4 font-medium opacity-90">
+              Sattu has been a timeless cornerstone of Indian wellness for centuries—powering farmers, warriors, and families with pure, uncompromised endurance.
             </p>
-            
-            <button className="mt-4 px-8 py-4 bg-[#4A5D4E] text-white rounded-md font-bold hover:bg-[#3D4D40] transition-all flex items-center gap-2 group uppercase tracking-widest text-xs">
-              Grab The Offer <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-            </button>
-          </div>
-
-          {/* Product Images */}
-          <div className="relative h-[300px] flex justify-center items-center">
-             <div className="flex items-end gap-2 relative">
-                <motion.img 
-                  animate={{ y: [0, -10, 0] }}
-                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                  src="https://images.unsplash.com/photo-1594488651083-023b857dc3f8?q=80&w=400&auto=format&fit=crop" 
-                  className="w-24 md:w-32 drop-shadow-lg" 
-                  alt="Jar 1"
-                />
-                <motion.img 
-                  animate={{ y: [0, -15, 0] }}
-                  transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                  src="https://images.unsplash.com/photo-1594488651083-023b857dc3f8?q=80&w=400&auto=format&fit=crop" 
-                  className="w-28 md:w-36 drop-shadow-xl z-10 -mx-4" 
-                  alt="Jar 2"
-                />
-                <motion.img 
-                  animate={{ y: [0, -12, 0] }}
-                  transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                  src="https://images.unsplash.com/photo-1594488651083-023b857dc3f8?q=80&w=400&auto=format&fit=crop" 
-                  className="w-24 md:w-32 drop-shadow-lg" 
-                  alt="Jar 3"
-                />
-                <motion.img 
-                  src="https://images.unsplash.com/photo-1556767576-5ec41e3239ea?q=80&w=400&auto=format&fit=crop" 
-                  className="w-20 md:w-24 rounded-2xl drop-shadow-lg absolute -right-10 bottom-0" 
-                  alt="Glass"
-                />
-             </div>
-
-             {/* Best Deal Stamp */}
-             <div className="absolute top-0 right-0 md:-right-10 w-20 h-20 bg-[#E91E63] text-white rounded-full flex flex-col items-center justify-center rotate-12 border-4 border-white shadow-lg">
-                <span className="text-[10px] font-bold uppercase leading-none">Best</span>
-                <span className="text-sm font-black uppercase leading-none">Deal</span>
-             </div>
+            <p className="text-[#707A72] text-xs lg:text-sm leading-relaxed">
+              We preserve this ancient craftsmanship while introducing five functional profiles tailored perfectly for modern fast-paced performance.
+            </p>
           </div>
         </div>
+
+        {/* Column 3: Feature Highlights (Signature Forest Green Block) */}
+        <div className="bg-[#1C3B24] p-8 lg:p-10 xl:p-12 text-[#EFECE6] flex flex-col justify-center space-y-6 lg:border-r border-[#112517] relative">
+          <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[linear-gradient(to_right,#fff_1px,transparent_1px)] [background-size:40px] hidden lg:block"></div>
+          
+          {/* Feature 1 */}
+          <div className="flex items-start space-x-4 group">
+            <div className="mt-1 p-2 rounded-lg bg-white/5 border border-white/10 text-[#D9A036] transition-colors group-hover:bg-[#D9A036]/10">
+              <GlassWater className="w-5 h-5 stroke-[1.5]" />
+            </div>
+            <div>
+              <p className="font-serif font-medium text-base text-white tracking-wide">Just Add Liquid</p>
+              <p className="text-xs text-[#A3B8A8] mt-0.5">Stir cleanly into water or milk. Ready instantly.</p>
+            </div>
+          </div>
+
+          {/* Feature 2 */}
+          <div className="flex items-start space-x-4 group">
+            <div className="mt-1 p-2 rounded-lg bg-white/5 border border-white/10 text-[#D9A036] transition-colors group-hover:bg-[#D9A036]/10">
+              <Zap className="w-5 h-5 stroke-[1.5]" />
+            </div>
+            <div>
+              <p className="font-serif font-medium text-base text-white tracking-wide">Clean Active Fuel</p>
+              <p className="text-xs text-[#A3B8A8] mt-0.5">Optimized cleanly for breakfast, work, or workouts.</p>
+            </div>
+          </div>
+
+          {/* Feature 3 */}
+          <div className="flex items-start space-x-4 group">
+            <div className="mt-1 p-2 rounded-lg bg-white/5 border border-white/10 text-[#D9A036] transition-colors group-hover:bg-[#D9A036]/10">
+              <Users className="w-5 h-5 stroke-[1.5]" />
+            </div>
+            <div>
+              <p className="font-serif font-medium text-base text-white tracking-wide">Family Formulation</p>
+              <p className="text-xs text-[#A3B8A8] mt-0.5">Perfect digestability for developing children & adults alike.</p>
+            </div>
+          </div>
+
+          {/* Feature 4 */}
+          <div className="flex items-start space-x-4 group">
+            <div className="mt-1 p-2 rounded-lg bg-white/5 border border-white/10 text-[#D9A036] transition-colors group-hover:bg-[#D9A036]/10">
+              <Sparkles className="w-5 h-5 stroke-[1.5]" />
+            </div>
+            <div>
+              <p className="font-serif font-medium text-base text-white tracking-wide">Daily Ritual</p>
+              <p className="text-xs text-[#A3B8A8] mt-0.5">Build a pure, high-fiber structural foundation every morning.</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Column 4: Product Image Background */}
+        <div className="relative h-72 md:h-96 lg:h-auto group overflow-hidden">
+          <div 
+            className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
+            style={{ 
+              backgroundImage: `url('img/s11.png')` 
+            }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-amber-950/20 to-amber-950/50 mix-blend-multiply"></div>
+        </div>
+
       </div>
-    </section>
+
+      {/* BOTTOM DEEP-GREEN TRUST FOOTER BANNER */}
+      <div className="bg-[#112517] text-white px-8 py-8 lg:px-12 flex flex-col lg:flex-row items-center justify-between gap-8 border-t border-[#1C3B24] relative">
+        
+        {/* Left Side: Tagline & CTA */}
+        <div className="flex flex-col sm:flex-row items-center gap-6 w-full lg:w-auto justify-between lg:justify-start z-10">
+          <div className="text-center sm:text-left">
+            <h3 className="font-serif text-xl lg:text-2xl font-bold tracking-wide text-white">
+              Real Ingredients. Real Nutrition.
+            </h3>
+            <p className="text-[#A3B8A8] text-xs mt-1 font-sans tracking-wide uppercase">No Added Preservatives • Clean Label Certified</p>
+          </div>
+          <motion.button 
+            whileHover={{ scale: 1.02, backgroundColor: '#C28E2E' }}
+            whileTap={{ scale: 0.98 }}
+            className="bg-[#D9A036] text-[#112517] font-sans font-bold uppercase tracking-widest text-xs px-8 py-4 rounded-md transition-colors shadow-lg shadow-black/10 whitespace-nowrap w-full sm:w-auto text-center"
+          >
+            Order Pure Sattu
+          </motion.button>
+        </div>
+
+        {/* Right Side: Trust Seals */}
+        <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-8 text-xs font-semibold uppercase tracking-widest text-[#D9E2DC] z-10 border-t border-white/5 pt-6 lg:pt-0 lg:border-t-0 w-full lg:w-auto">
+          
+          {/* Trust item 1 */}
+          <div className="flex items-center space-x-2.5 group">
+            <Leaf className="w-4 h-4 text-[#D9A036] transition-transform group-hover:rotate-12" strokeWidth={2} />
+            <span>100% Natural</span>
+          </div>
+
+          {/* Divider Line */}
+          <div className="hidden sm:block h-4 w-[1px] bg-white/10"></div>
+
+          {/* Trust item 2 */}
+          <div className="flex items-center space-x-2.5 group">
+            <Globe2 className="w-4 h-4 text-[#D9A036] transition-transform group-hover:scale-11" strokeWidth={2} />
+            <span>Made In India</span>
+          </div>
+
+          {/* Divider Line */}
+          <div className="hidden sm:block h-4 w-[1px] bg-white/10"></div>
+
+          {/* Trust item 3 */}
+          <div className="flex items-center space-x-2.5 group">
+            <CheckCircle2 className="w-4 h-4 text-[#D9A036] transition-transform group-hover:scale-11" strokeWidth={2} />
+            <span>Lab Tested</span>
+          </div>
+
+        </div>
+
+        {/* Fine-line Accent Geometry Overlays */}
+        <div className="absolute right-0 top-0 w-48 h-full opacity-[0.02] pointer-events-none hidden xl:block">
+          <div className="w-full h-full border-l border-dashed border-white"></div>
+        </div>
+
+      </div>
+    </div>
   );
 };
 
-export default OfferBanner;
+export default SattuStorySection;

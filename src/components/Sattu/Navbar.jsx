@@ -29,13 +29,13 @@ const Navbar = () => {
     <nav className="fixed top-0 left-0 w-full z-50">
       {/* Top Announcement Bar */}
       <div className="bg-[#4A5D4E] text-[#FDFBF7] py-2.5 px-4 overflow-hidden">
-        <div className="max-w-7xl mx-auto flex justify-between items-center text-[10px] md:text-[11px] font-medium tracking-wide">
+        <div className="max-w-7xl mx-auto flex justify-between items-center text-xs md:text-sm font-medium tracking-wide">
           <div className="flex items-center gap-2">
             <Leaf size={14} />
             <span>100% Natural Ingredients</span>
           </div>
           <div className="flex items-center gap-2">
-            <span className="w-4 h-4 rounded-full border border-white flex items-center justify-center text-[10px]">✓</span>
+            <span className="w-4 h-4 rounded-full border border-white flex items-center justify-center text-xs">✓</span>
             <span>No Preservatives</span>
           </div>
           <div className="flex items-center gap-2">

@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "./useAuth";
-import { Mail, Lock, ArrowRight, Leaf, AlertCircle } from "lucide-react";
+import { Mail, Lock, ArrowRight, Leaf, AlertCircle, Eye, EyeOff } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Login = () => {
   const { login } = useAuth();
@@ -10,6 +11,9 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+
+  const premiumEase = [0.25, 1, 0.5, 1];
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,95 +23,170 @@ const Login = () => {
       await login(email, password);
       navigate("/");
     } catch {
-      setError("The credentials provided do not match our records.");
+      setError("The credentials provided do not match our archive records.");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen bg-[#F3ECE1] flex items-center justify-center px-6 py-32 relative overflow-hidden">
-      {/* Background Decorations */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-        <div className="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] bg-[#4A5D4E]/5 rounded-full blur-[120px]" />
-        <div className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-[#6D4C3D]/5 rounded-full blur-[120px]" />
-      </div>
+    <div className="min-h-screen bg-[#FDFBF7]  mt-35 text-[#1C2B21] flex relative overflow-hidden selection:bg-[#1C3B24] selection:text-white">
+      
+      {/* LEFT COLUMN: VISUAL ART DIRECTION EMBED (HIDDEN ON MOBILE) */}
+      <div className="hidden lg:flex w-[45%] bg-[#1C3B24] relative flex-col justify-between p-16 overflow-hidden">
+        {/* Subtle geometric dot matrix layering */}
+        <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:24px_24px]" />
+        
+        {/* Abstract luxury ambient texture background blur */}
+        <div className="absolute top-[-20%] left-[-20%] w-[600px] h-[600px] bg-[#D9A036]/10 rounded-full blur-[140px]" />
+        
+        <Link to="/" className="relative z-10 flex items-center gap-2 text-[#EFECE6] text-[11px] font-bold uppercase tracking-[0.3em] opacity-80 hover:opacity-100 transition-opacity">
+          <Leaf size={16} className="text-[#D9A036]" />
+          <span>Sattu Maison d'Origine</span>
+        </Link>
 
-      <div className="w-full max-w-xl bg-[#FDFBF7] rounded-[48px] border border-[#E6DDC4]/40 shadow-[0_40px_100px_rgba(74,93,78,0.05)] p-8 md:p-16 relative z-10">
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-[#4A5D4E] rounded-2xl text-white mb-8 shadow-xl shadow-[#4A5D4E]/20">
-            <Leaf size={32} />
-          </div>
-          <h2 className="text-4xl md:text-5xl font-serif italic text-[#2D231D] tracking-tight mb-4">
-            Welcome <span className="text-[#4A5D4E] not-italic font-black uppercase tracking-tighter">Back</span>
-          </h2>
-          <p className="text-[#5A5047] font-medium">Continue your journey to natural vitality.</p>
+        <div className="relative z-10 space-y-6 max-w-sm">
+          <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-[#D9A036]">Verified Member Access</span>
+          <h1 className="text-4xl xl:text-5xl font-serif font-light text-[#EFECE6] leading-[1.15] tracking-tight">
+            Cultivating wellness through traditional raw formulation.
+          </h1>
+          <p className="text-xs text-[#EFECE6]/60 font-light leading-relaxed tracking-wide">
+            Access your curated dietary parameters, personalized collection archives, and premium subscription reserves.
+          </p>
         </div>
 
-        {error && (
-          <div className="mb-8 p-4 bg-red-50 border border-red-100 rounded-2xl flex items-center gap-3 text-red-600 text-sm font-bold">
-            <AlertCircle size={18} />
-            {error}
-          </div>
-        )}
+        <div className="relative z-10 border-t border-white/10 pt-6 text-[9px] font-mono tracking-widest text-[#EFECE6]/40 uppercase">
+          © 2026 Maison Sattu. All Rights Reserved.
+        </div>
+      </div>
 
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="space-y-2">
-            <label className="text-[10px] font-black uppercase tracking-widest text-[#4A5D4E]/40 ml-4">Email Address</label>
-            <div className="relative">
-              <Mail className="absolute left-6 top-1/2 -translate-y-1/2 text-[#4A5D4E]/20" size={20} />
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="name@example.com"
-                className="w-full pl-14 pr-6 py-5 rounded-2xl bg-[#FDFBF7] border border-[#E6DDC4]/40 focus:bg-white focus:border-[#4A5D4E]/30 outline-none transition-all font-bold text-[#2D231D] placeholder:text-[#4A5D4E]/20 shadow-sm"
-                required
-              />
+      {/* RIGHT COLUMN: ACCESS FORM WORKSPACE */}
+      <div className="flex-1 flex flex-col justify-center items-center px-6 md:px-16 lg:px-24 py-20 relative bg-[#F9F8F6]">
+        {/* Subtle organic mesh background grid lines */}
+        <div className="absolute inset-0 opacity-[0.02] pointer-events-none bg-[radial-gradient(#000_1px,transparent_1px)] [background-size:32px_32px]" />
+        
+        <div className="w-full max-w-[420px] relative z-10">
+          
+          {/* Header Workspace Stack */}
+          <div className="mb-10 lg:mb-12">
+            <div className="lg:hidden inline-flex items-center justify-center w-12 h-12 bg-[#1C3B24] text-white rounded-xl mb-6 shadow-xl shadow-[#1C3B24]/10">
+              <Leaf size={20} />
             </div>
-          </div>
-
-          <div className="space-y-2">
-            <div className="flex justify-between items-center px-4">
-              <label className="text-[10px] font-black uppercase tracking-widest text-[#4A5D4E]/40">Password</label>
-              <button type="button" className="text-[10px] font-black uppercase tracking-widest text-[#4A5D4E] hover:underline">Forgot?</button>
-            </div>
-            <div className="relative">
-              <Lock className="absolute left-6 top-1/2 -translate-y-1/2 text-[#4A5D4E]/20" size={20} />
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="••••••••"
-                className="w-full pl-14 pr-6 py-5 rounded-2xl bg-[#FDFBF7] border border-[#E6DDC4]/40 focus:bg-white focus:border-[#4A5D4E]/30 outline-none transition-all font-bold text-[#2D231D] placeholder:text-[#4A5D4E]/20 shadow-sm"
-                required
-              />
-            </div>
+            <h2 className="text-3xl sm:text-4xl font-serif font-light text-[#1C2B21] tracking-tight mb-3">
+              Account Authentication
+            </h2>
+            <p className="text-xs text-[#707A72] font-light tracking-wide">
+              Please declare your secure cryptographic records below.
+            </p>
           </div>
 
-          <button
-            type="submit"
-            disabled={loading}
-            className="group w-full py-5 rounded-2xl bg-[#4A5D4E] text-white font-black text-lg hover:bg-[#2D231D] transition-all transform active:scale-[0.98] shadow-xl shadow-[#4A5D4E]/20 flex items-center justify-center gap-3"
-          >
-            {loading ? (
-              <div className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-            ) : (
-              <>
-                Enter Shop
-                <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-              </>
+          {/* Luxury Error Diagnostics Prompt */}
+          <AnimatePresence mode="wait">
+            {error && (
+              <motion.div 
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.3 }}
+                className="mb-8 p-4 bg-red-50/60 border border-red-100 rounded-xl flex items-start gap-3 text-red-700 text-xs font-medium leading-relaxed"
+              >
+                <AlertCircle size={15} className="shrink-0 text-red-500 mt-0.5" />
+                <span>{error}</span>
+              </motion.div>
             )}
-          </button>
-        </form>
+          </AnimatePresence>
 
-        <div className="mt-12 text-center">
-          <p className="text-sm text-[#5A5047] font-medium">
-            New to Sattu?{" "}
-            <Link to="/signup" className="text-[#4A5D4E] font-black hover:underline ml-1">
-              Create an Account
-            </Link>
-          </p>
+          {/* Interactive Form Field Canvas */}
+          <form onSubmit={handleSubmit} className="space-y-6">
+            
+            {/* Email Field Block */}
+            <div className="space-y-2">
+              <div className="flex justify-between items-center px-0.5">
+                <label className="text-[9px] font-bold uppercase tracking-widest text-[#9A8F80]">
+                  Registry Email Address
+                </label>
+              </div>
+              <div className="relative group">
+                <div className="absolute left-5 top-1/2 -translate-y-1/2 text-[#9A8F80]/60 group-focus-within:text-[#1C3B24] transition-colors duration-300">
+                  <Mail size={16} strokeWidth={1.5} />
+                </div>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="name@domain.com"
+                  className="w-full pl-13 pr-5 py-4.5 rounded-xl bg-white border border-[#EAE6DF] focus:border-[#1C3B24] outline-none transition-all duration-300 font-serif text-[14px] text-[#1C2B21] placeholder:text-[#9A8F80]/40 shadow-[0_4px_20px_rgba(0,0,0,0.01)]"
+                  required
+                />
+              </div>
+            </div>
+
+            {/* Password Field Block */}
+            <div className="space-y-2">
+              <div className="flex justify-between items-center px-0.5">
+                <label className="text-[9px] font-bold uppercase tracking-widest text-[#9A8F80]">
+                  Private Vault Key
+                </label>
+                <button 
+                  type="button" 
+                  className="text-[9px] font-bold uppercase tracking-widest text-[#9A8F80] hover:text-[#1C3B24] transition-colors"
+                >
+                  Recovery Protocol?
+                </button>
+              </div>
+              <div className="relative group">
+                <div className="absolute left-5 top-1/2 -translate-y-1/2 text-[#9A8F80]/60 group-focus-within:text-[#1C3B24] transition-colors duration-300">
+                  <Lock size={16} strokeWidth={1.5} />
+                </div>
+                <input
+                  type={showPassword ? "text" : "password"}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="••••••••"
+                  className="w-full pl-13 pr-12 py-4.5 rounded-xl bg-white border border-[#EAE6DF] focus:border-[#1C3B24] outline-none transition-all duration-300 font-serif text-[14px] text-[#1C2B21] placeholder:text-[#9A8F80]/40 shadow-[0_4px_20px_rgba(0,0,0,0.01)]"
+                  required
+                />
+                {/* Premium Visibility Toggle Node */}
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-[#9A8F80]/60 hover:text-[#1C2B21] transition-colors"
+                >
+                  {showPassword ? <EyeOff size={16} strokeWidth={1.5} /> : <Eye size={16} strokeWidth={1.5} />}
+                </button>
+              </div>
+            </div>
+
+            {/* Main Committal Action Interface */}
+            <button
+              type="submit"
+              disabled={loading}
+              className="group w-full h-[54px] rounded-xl bg-[#1C3B24] text-[#EFECE6] font-bold text-[10px] uppercase tracking-[0.25em] shadow-xl shadow-[#1C3B24]/10 hover:bg-[#1C2B21] transition-all duration-300 flex items-center justify-center gap-3 transform active:scale-[0.99] disabled:opacity-50 disabled:pointer-events-none"
+            >
+              {loading ? (
+                <div className="relative w-5 h-5">
+                  <div className="absolute inset-0 border-2 border-white/20 rounded-full" />
+                  <div className="absolute inset-0 border-2 border-t-white rounded-full animate-spin" />
+                </div>
+              ) : (
+                <>
+                  <span>Authenticate Registry</span>
+                  <ArrowRight size={13} strokeWidth={1.5} className="group-hover:translate-x-1 transition-transform duration-300" />
+                </>
+              )}
+            </button>
+          </form>
+
+          {/* Membership Creation Access Anchor */}
+          <div className="mt-10 text-center">
+            <p className="text-xs text-[#707A72] font-light tracking-wide">
+              New to our House Registry?{" "}
+              <Link to="/signup" className="text-[#1C3B24] font-bold hover:text-[#D9A036] ml-1 transition-colors duration-300">
+                Create Credentials
+              </Link>
+            </p>
+          </div>
+          
         </div>
       </div>
     </div>

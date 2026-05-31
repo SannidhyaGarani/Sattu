@@ -4,12 +4,13 @@ import Header from "./components/Header";
 import Footer from "./components/Sattu/Footer";
 import Home from "./components/Homepage/Home";
 import Admin from "./pages/Admin/Admin";
-import SuperAdmin from "./pages/SuperAdmin/SuperAdmin";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import AuthProvider from "./components/AuthProvider";
 import Login from "./components/Login";
+import Benefits from "./pages/Benefits";
 import Signup from "./components/Signup";
 import Cart from "./layouts/Cart";
+import Checkout from "./layouts/Checkout";
 import Wishlist from "./components/Wishlist";
 import ProductDetail from "./layouts/ProductDetail";
 import QuickView from "./components/QuickView";
@@ -33,15 +34,16 @@ const AppRoutes = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/admin" element={<Admin />} />
-        <Route path="/super" element={<SuperAdmin />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/checkout" element={<Checkout />} />
         <Route path="/wishlist" element={<Wishlist />} />
         <Route path="/account" element={<Account />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/shop" element={<Shop />} />
+        <Route path="/benefits" element={<Benefits />} />
         <Route path="/product/:id" element={<ProductDetail />} />
         <Route path="/product/:id/quickview" element={<QuickView />} />
       </Routes>

@@ -2,11 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { ShoppingCart, User, Search, Menu, X, Leaf, Heart } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
+import { useAuth } from './useAuth';
+import { db } from './Firebase';
+import { collection, getDocs, onSnapshot } from 'firebase/firestore';
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [cartCount, setCartCount] = useState(2); // Mock cart count
+  const [cartCount, setCartCount] = useState(0);
+  const [wishlistCount, setWishlistCount] = useState(0);
   const location = useLocation();
+  const { user } = useAuth();
   const { scrollY } = useScroll();
 
   // Premium scroll transformations
@@ -27,13 +32,48 @@ const Header = () => {
     setIsMobileMenuOpen(false);
   }, [location]);
 
+  useEffect(() => {
+    if (!user) {
+      setCartCount(0);
+      setWishlistCount(0);
+      return;
+    }
+
+    // Real-time listener for cart
+    const unsubscribeCart = onSnapshot(
+      collection(db, "users", user.uid, "cart"),
+      (snapshot) => {
+        setCartCount(snapshot.size);
+      },
+      (error) => {
+        console.error("Error fetching cart:", error);
+      }
+    );
+
+    // Real-time listener for wishlist
+    const unsubscribeWishlist = onSnapshot(
+      collection(db, "users", user.uid, "wishlist"),
+      (snapshot) => {
+        setWishlistCount(snapshot.size);
+      },
+      (error) => {
+        console.error("Error fetching wishlist:", error);
+      }
+    );
+
+    // Cleanup listeners on unmount or user change
+    return () => {
+      unsubscribeCart();
+      unsubscribeWishlist();
+    };
+  }, [user]);
+
   const navLinks = [
     { name: 'Home', path: '/' },
-    { name: 'Shop', path: '/shop' },
-    { name: 'Flavours', path: '/flavours' },
-    { name: 'Benefits', path: '/benefits' },
-    { name: 'How to Make', path: '/how-to-make' },
     { name: 'About Us', path: '/about' },
+    { name: 'Shop', path: '/shop' },
+    { name: 'Benefits', path: '/benefits' },
+    { name: 'Contact us', path: '/contact' },
   ];
 
   return (
@@ -117,7 +157,7 @@ const Header = () => {
             >
               <Search size={20} strokeWidth={2.5} />
             </motion.button>
-            <Link to="/wishlist">
+            <Link to="/wishlist" className="relative group">
               <motion.div
                 whileHover={{ scale: 1.1, backgroundColor: 'rgba(74, 93, 78, 0.05)' }}
                 whileTap={{ scale: 0.95 }}
@@ -125,6 +165,15 @@ const Header = () => {
               >
                 <Heart size={20} strokeWidth={2.5} />
               </motion.div>
+              {wishlistCount > 0 && (
+                <motion.span
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  className="absolute -top-1 -right-1 bg-[#D9A036] text-[#FDFBF7] text-[9px] font-black w-5 h-5 rounded-full flex items-center justify-center shadow-lg border-2 border-[#FDFBF7]"
+                >
+                  {wishlistCount}
+                </motion.span>
+              )}
             </Link>
             <Link to="/account">
               <motion.div
@@ -143,13 +192,15 @@ const Header = () => {
               >
                 <ShoppingCart size={22} strokeWidth={2.5} />
               </motion.div>
-              <motion.span 
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                className="absolute -top-1 -right-1 bg-[#6D4C3D] text-[#FDFBF7] text-[9px] font-black w-5 h-5 rounded-full flex items-center justify-center shadow-lg border-2 border-[#FDFBF7]"
-              >
-                {cartCount}
-              </motion.span>
+              {cartCount > 0 && (
+                <motion.span 
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  className="absolute -top-1 -right-1 bg-[#D9A036] text-[#FDFBF7] text-[9px] font-black w-5 h-5 rounded-full flex items-center justify-center shadow-lg border-2 border-[#FDFBF7]"
+                >
+                  {cartCount}
+                </motion.span>
+              )}
             </Link>
             <motion.button 
               whileTap={{ scale: 0.9 }}

@@ -1,9 +1,23 @@
-import React, { useEffect, useState } from "react";
-import { useParams, useNavigate, Link } from "react-router-dom";
-import { db } from "../components/Firebase";
-import { doc, getDoc, setDoc } from "firebase/firestore";
-import { useAuth } from "../components/useAuth";
-import { Star, Shield, Truck, RotateCcw, Heart, ShoppingBag, ArrowLeft, Share2, Info, Leaf, Zap, Coffee } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { useParams, useNavigate, Link } from 'react-router-dom';
+import { db } from '../components/Firebase';
+import { doc, getDoc, setDoc } from 'firebase/firestore';
+import { useAuth } from '../components/useAuth';
+import { 
+  Star, 
+  Shield, 
+  Truck, 
+  Heart, 
+  ShoppingBag, 
+  Share2, 
+  Info, 
+  Leaf, 
+  Sparkles,
+  ChevronRight,
+  Maximize2,
+  X,
+  ArrowLeft
+} from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const ProductDetail = () => {
@@ -14,7 +28,9 @@ const ProductDetail = () => {
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('description');
   const [quantity, setQuantity] = useState(1);
-  const [selectedWeight, setSelectedWeight] = useState('500g');
+  const [feedbackMessage, setFeedbackMessage] = useState(null);
+
+  const premiumEase = [0.25, 1, 0.5, 1];
 
   useEffect(() => {
     const load = async () => {
@@ -28,9 +44,14 @@ const ProductDetail = () => {
     load();
   }, [id]);
 
+  const triggerToast = (msg) => {
+    setFeedbackMessage(msg);
+    setTimeout(() => setFeedbackMessage(null), 4000);
+  };
+
   const addToCollection = async (collectionName) => {
     if (!user) {
-      navigate("/login");
+      navigate('/login');
       return;
     }
     if (!product) return;
@@ -43,231 +64,314 @@ const ProductDetail = () => {
         image: product.image || product.images?.[0] || "",
         addedAt: new Date().toISOString(),
         quantity: quantity,
-        weight: selectedWeight
+        flavor: product.flavor || ''
       });
-      alert(`Added to ${collectionName}!`);
+      triggerToast(`Successfully added to ${collectionName}!`);
     } catch (error) {
       console.error(`Error adding to ${collectionName}:`, error);
+      triggerToast("An error occurred. Please try again.");
     }
   };
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-brand-cream flex flex-col items-center justify-center gap-4">
-        <div className="w-12 h-12 border-4 border-brand-olive/20 border-t-brand-olive rounded-full animate-spin" />
-        <p className="text-[10px] font-black uppercase tracking-[0.3em] text-brand-olive/40">Preparing your natural blend...</p>
+      <div className="min-h-screen bg-[#F9F8F6] flex flex-col items-center justify-center gap-6">
+        <div className="relative w-16 h-16">
+          <div className="absolute inset-0 border-2 border-[#1C3B24]/10 rounded-full" />
+          <div className="absolute inset-0 border-2 border-t-[#D9A036] rounded-full animate-spin" />
+        </div>
+        <p className="text-[9px] font-bold uppercase tracking-[0.4em] text-[#9A8F80]">Compiling Formulation Profiles...</p>
       </div>
     );
   }
 
   if (!product) {
     return (
-      <div className="min-h-screen bg-brand-cream flex flex-col items-center justify-center gap-6">
-        <p className="text-xl font-bold text-brand-olive">Product not found.</p>
-        <button onClick={() => navigate('/')} className="px-8 py-3 rounded-2xl bg-brand-olive text-brand-cream font-bold text-xs uppercase tracking-widest hover:bg-brand-olive-light transition-colors">
-          Back to Shop
-        </button>
+      <div className="min-h-screen bg-[#F9F8F6] flex flex-col items-center justify-center text-center p-6">
+        <div className="w-12 h-12 rounded-full bg-white border border-[#EAE6DF] flex items-center justify-center text-[#9A8F80] mb-6">
+          <Info size={16} strokeWidth={1.5} />
+        </div>
+        <h3 className="text-xl font-serif font-bold text-[#1C2B21] mb-2">Formulation Unresolved</h3>
+        <p className="text-xs text-[#707A72] font-light max-w-xs mx-auto mb-8 leading-relaxed">
+          The unique parameter tracking index could not identify a correlated organic blend within our records.
+        </p>
+        <Link to="/shop" className="inline-flex items-center gap-2 px-8 py-4 bg-[#1C3B24] text-[#EFECE6] font-bold text-[10px] uppercase tracking-widest rounded-xl hover:bg-[#1C2B21] transition-all shadow-xl shadow-[#1C3B24]/10">
+          <span>Return To Registry</span>
+          <ChevronRight size={12} />
+        </Link>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-brand-cream pt-40 pb-20 grainy">
-      <div className="max-w-[1440px] mx-auto px-6 md:px-12">
-        {/* Breadcrumbs & Navigation */}
-        <div className="flex items-center justify-between mb-12">
+    <div className="min-h-screen bg-[#F9F8F6] pt-32 lg:pt-44 pb-32 text-[#1C2B21] relative selection:bg-[#1C3B24] selection:text-white">
+      {/* Light Luxury Geometric Dot Mesh Overlay */}
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[radial-gradient(#000_1px,transparent_1px)] [background-size:32px_32px]"></div>
+
+      {/* Premium Toast System */}
+      <AnimatePresence>
+        {feedbackMessage && (
+          <motion.div 
+            initial={{ opacity: 0, y: 50, x: '-50%' }}
+            animate={{ opacity: 1, y: 0, x: '-50%' }}
+            exit={{ opacity: 0, y: 20, x: '-50%' }}
+            className="fixed bottom-12 left-1/2 z-50 bg-[#1C3B24] border border-white/10 text-[#EFECE6] px-6 py-4 rounded-xl shadow-2xl flex items-center gap-4 backdrop-blur-md max-w-md w-[90%]"
+          >
+            <Sparkles size={16} className="text-[#D9A036] shrink-0" />
+            <p className="text-xs font-light tracking-wide flex-1">{feedbackMessage}</p>
+            <button onClick={() => setFeedbackMessage(null)} className="opacity-40 hover:opacity-100 transition-opacity">
+              <X size={14} />
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16 relative z-10">
+        
+        {/* ================= NAVIGATION BACKTRACK TRACK ================= */}
+        <div className="flex items-center justify-between pb-10 border-b border-[#EAE6DF] mb-12 sm:mb-16">
           <button 
             onClick={() => navigate(-1)}
-            className="group flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.25em] text-brand-olive/40 hover:text-brand-olive transition-colors"
+            className="group flex items-center gap-3 text-[9px] font-bold uppercase tracking-[0.3em] text-[#9A8F80] hover:text-[#1C2B21] transition-colors"
           >
-            <div className="w-8 h-8 rounded-full border border-brand-olive/10 flex items-center justify-center group-hover:border-brand-olive/30 transition-all">
-              <ArrowLeft size={14} />
-            </div>
-            Back to Shop
+            <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" />
+            <span>Return to Collection Archive</span>
           </button>
-          <div className="flex items-center gap-4">
-            <button className="w-10 h-10 rounded-full border border-brand-olive/10 flex items-center justify-center text-brand-olive/40 hover:text-brand-olive hover:border-brand-olive/30 transition-all">
-              <Share2 size={16} />
-            </button>
-          </div>
+          
+          <button className="w-10 h-10 rounded-xl border border-[#EAE6DF] bg-white flex items-center justify-center text-[#5C665E] hover:text-[#1C2B21] hover:border-[#1C3B24] transition-all shadow-sm">
+            <Share2 size={14} strokeWidth={1.5} />
+          </button>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-16 xl:gap-24 items-start">
-          {/* Left: Visuals */}
-          <div className="space-y-6">
+        {/* ================= MAIN METAFRAME DISPATCH GRID ================= */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 xl:gap-20 items-start">
+          
+          {/* LEFT COLUMN: ARCHITECTURAL GALLERY CAPTURE */}
+          <div className="lg:col-span-6 space-y-8">
             <motion.div 
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="relative aspect-[4/5] bg-white rounded-[48px] overflow-hidden border border-brand-olive/5 shadow-premium group"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: premiumEase }}
+              className="relative aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EAE6DF] shadow-[0_30px_70px_rgba(28,43,33,0.02)] group flex items-center justify-center p-12"
             >
               <img
-                src={product.image}
+                src={product.image || product.images?.[0] || "https://images.unsplash.com/photo-1594488651083-023b857dc3f8?q=80&w=600&auto=format&fit=crop"}
                 alt={product.name}
-                className="w-full h-full object-contain p-12 transform transition-transform duration-1000 group-hover:scale-110 grayscale-[0.2] group-hover:grayscale-0"
+                className="w-full h-full object-contain filter drop-shadow-2xl transform transition-transform duration-[1.5s] ease-out group-hover:scale-102"
               />
-              <div className="absolute top-8 left-8">
-                <span className="px-5 py-2 rounded-2xl bg-white/90 backdrop-blur-md text-[10px] font-black uppercase tracking-[0.2em] text-brand-olive shadow-sm border border-brand-olive/10">
-                  {product.category || 'Natural Mix'}
+              
+              {/* Flavor Profile Callout Badge */}
+              <div className="absolute top-6 left-6">
+                <span className="px-5 py-2.5 rounded-lg bg-[#F9F8F6]/90 backdrop-blur-md text-[9px] font-bold uppercase tracking-widest text-[#1C2B21] border border-[#EAE6DF] shadow-sm">
+                  {product.flavor || 'Classic Roasted'}
                 </span>
               </div>
+              
+              {/* Structural Stock Status Indicator */}
+              {product.stock_status && (
+                <div className="absolute bottom-6 right-6">
+                  <span className={`px-4 py-2 rounded-md text-[9px] font-bold uppercase tracking-widest border shadow-sm ${
+                    product.stock_status === 'In Stock' 
+                      ? 'bg-[#1C3B24]/5 text-[#1C3B24] border-[#1C3B24]/10' 
+                      : product.stock_status === 'Low Stock' 
+                      ? 'bg-[#D9A036]/5 text-[#D9A036] border-[#D9A036]/10' 
+                      : 'bg-red-50 text-red-700 border-red-100'
+                  }`}>
+                    {product.stock_status}
+                  </span>
+                </div>
+              )}
             </motion.div>
             
-            {/* Trust Badges */}
+            {/* Fine Art Trust Metrics Canvas Grid */}
             <div className="grid grid-cols-3 gap-4">
               {[
-                { icon: <Leaf size={20} />, text: '100% Organic' },
-                { icon: <Shield size={20} />, text: 'Zero Preservatives' },
-                { icon: <RotateCcw size={20} />, text: 'Fresh Batch Guarantee' }
-              ].map((item, i) => (
-                <div key={i} className="flex flex-col items-center text-center p-6 rounded-[32px] bg-white border border-brand-olive/5 space-y-3 shadow-sm hover:border-brand-olive/20 transition-all">
-                  <div className="text-brand-brown">{item.icon}</div>
-                  <p className="text-[9px] font-black uppercase tracking-widest text-brand-olive/60 leading-tight">{item.text}</p>
-                </div>
-              ))}
+                { icon: Leaf, text: '100% Bio-Organic' },
+                { icon: Shield, text: 'Zero Modifiers' },
+                { icon: Truck, text: 'Priority Dispatch' }
+              ].map((item, i) => {
+                const Icon = item.icon;
+                return (
+                  <div key={i} className="flex flex-col items-center text-center p-5 rounded-xl bg-white border border-[#EAE6DF] space-y-2.5 shadow-sm transition-all duration-300 hover:border-[#1C3B24]/20">
+                    <div className="text-[#D9A036]"><Icon size={24} strokeWidth={1.5} /></div>
+                    <p className="text-[8px] font-bold uppercase tracking-[0.15em] text-[#9A8F80] leading-snug">{item.text}</p>
+                  </div>
+                );
+              })}
             </div>
           </div>
 
-          {/* Right: Content */}
-          <div className="space-y-10">
+          {/* RIGHT COLUMN: REFINED EDITORIAL DATA INFUSION */}
+          <div className="lg:col-span-6 space-y-10">
+            
+            {/* Header Identity Deck */}
             <div className="space-y-4">
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-3">
                 <div className="flex gap-0.5">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} size={14} fill={i < 4 ? "#6D4C3D" : "none"} className={i < 4 ? "text-brand-brown" : "text-brand-olive/10"} />
+                    <Star 
+                      key={i} 
+                      size={12} 
+                      fill={i < Math.floor(product.rating || 4.8) ? "#D9A036" : "none"} 
+                      className={i < Math.floor(product.rating || 4.8) ? "text-[#D9A036]" : "text-[#EAE6DF]"} 
+                    />
                   ))}
                 </div>
-                <span className="text-[10px] font-black text-brand-olive/40 uppercase tracking-widest">(4.8/5 based on 2k+ reviews)</span>
+                <span className="text-[9px] font-bold text-[#9A8F80] uppercase tracking-widest">{product.rating || 4.8} // Verified Score</span>
               </div>
               
-              <h1 className="text-5xl md:text-7xl font-serif text-brand-olive leading-[0.9] tracking-tighter">
+              <h1 className="text-4xl sm:text-5xl font-serif font-light text-[#1C2B21] tracking-tight leading-[1.1]">
                 {product.name}
               </h1>
               
-              <div className="flex items-center gap-6">
-                <span className="text-4xl font-serif font-black text-brand-brown">
-                  ₹{product.price}
-                </span>
-                <div className="px-3 py-1 rounded-full bg-brand-olive/10 text-brand-olive text-[10px] font-black uppercase tracking-widest">
-                  Ready to Ship
+              {/* Cost Calibration Node Matrix */}
+              <div className="pt-4 flex items-center gap-4">
+                <div className="flex items-baseline gap-3">
+                  <span className="text-3xl font-serif font-light text-[#1C3B24]">₹{product.price}</span>
+                  {product.original_price && product.original_price > product.price && (
+                    <span className="text-base text-[#9A8F80] line-through font-serif font-light">₹{product.original_price}</span>
+                  )}
                 </div>
+                {product.net_quantity && (
+                  <span className="px-3 py-1 rounded-md bg-white text-[9px] font-bold uppercase tracking-widest text-[#5C665E] border border-[#EAE6DF] shadow-sm">
+                    {product.net_quantity}
+                  </span>
+                )}
               </div>
             </div>
 
-            {/* Selection Controls */}
-            <div className="space-y-6 pt-10 border-t border-brand-olive/10">
-              <div className="flex items-center gap-8 flex-wrap">
-                <div className="space-y-3">
-                  <p className="text-[10px] font-black uppercase tracking-widest text-brand-olive/40">Quantity</p>
-                  <div className="flex items-center bg-white rounded-2xl p-1 border border-brand-olive/10">
+            {/* Ingestion & Allocation Node Controls */}
+            <div className="pt-8 border-t border-[#EAE6DF] space-y-6">
+              <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 items-end">
+                
+                {/* Micro-Counter Input Wrapper */}
+                <div className="sm:col-span-4 space-y-2">
+                  <p className="text-[8px] font-bold uppercase tracking-widest text-[#9A8F80] ml-0.5">Allocation Units</p>
+                  <div className="flex items-center justify-between bg-white rounded-xl p-1.5 border border-[#EAE6DF] shadow-inner">
                     <button 
                       onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                      className="w-10 h-10 flex items-center justify-center font-bold text-brand-olive hover:bg-brand-cream rounded-xl transition-all"
-                    >-</button>
-                    <span className="w-12 text-center font-bold text-brand-olive">{quantity}</span>
+                      className="w-10 h-10 flex items-center justify-center text-sm font-light text-[#1C2B21] hover:bg-[#F9F8F6] rounded-lg transition-all"
+                    >
+                      −
+                    </button>
+                    <span className="font-serif font-medium text-[#1C2B21] text-base">{quantity}</span>
                     <button 
                       onClick={() => setQuantity(quantity + 1)}
-                      className="w-10 h-10 flex items-center justify-center font-bold text-brand-olive hover:bg-brand-cream rounded-xl transition-all"
-                    >+</button>
+                      className="w-10 h-10 flex items-center justify-center text-sm font-light text-[#1C2B21] hover:bg-[#F9F8F6] rounded-lg transition-all"
+                    >
+                      +
+                    </button>
                   </div>
                 </div>
-                
-                <div className="flex-1 space-y-3 min-w-[200px]">
-                  <p className="text-[10px] font-black uppercase tracking-widest text-brand-olive/40">Select Weight</p>
-                  <div className="flex gap-2">
-                    {['250g', '500g', '1kg'].map((size) => (
-                      <button 
-                        key={size} 
-                        onClick={() => setSelectedWeight(size)}
-                        className={`flex-1 px-4 py-4 rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all ${selectedWeight === size ? 'bg-brand-olive text-brand-cream' : 'bg-white text-brand-olive border border-brand-olive/10 hover:bg-brand-olive/5'}`}
-                      >
-                        {size}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              </div>
 
-              <div className="flex gap-4 pt-4">
-                <button
-                  onClick={() => addToCollection("cart")}
-                  className="flex-1 h-16 rounded-[24px] bg-brand-olive text-brand-cream font-black text-xs uppercase tracking-[0.2em] shadow-premium hover:bg-brand-olive-light transition-all transform active:scale-95 flex items-center justify-center gap-3"
-                >
-                  <ShoppingBag size={18} />
-                  Add to Cart
-                </button>
-                <button
-                  onClick={() => addToCollection("wishlist")}
-                  className="w-16 h-16 rounded-[24px] bg-white border border-brand-olive/10 flex items-center justify-center text-brand-olive hover:text-brand-brown hover:border-brand-brown transition-all"
-                >
-                  <Heart size={20} />
-                </button>
+                {/* Primary Cart Committal Control */}
+                <div className="sm:col-span-8 flex gap-3">
+                  <button
+                    onClick={() => addToCollection("cart")}
+                    className="flex-1 h-[54px] rounded-xl bg-[#1C3B24] text-[#EFECE6] font-bold text-[10px] uppercase tracking-[0.25em] shadow-xl shadow-[#1C3B24]/10 hover:bg-[#1C2B21] transition-all duration-300 flex items-center justify-center gap-3 transform active:scale-[0.99]"
+                  >
+                    <ShoppingBag size={13} strokeWidth={1.5} />
+                    <span>Commit To Cart</span>
+                  </button>
+                  
+                  {/* Personal Wishlist Archival Control */}
+                  <button
+                    onClick={() => addToCollection("wishlist")}
+                    className="w-[54px] h-[54px] rounded-xl bg-white border border-[#EAE6DF] flex items-center justify-center text-[#1C2B21] hover:text-[#D9A036] hover:border-[#9A8F80]/50 transition-all shadow-sm"
+                  >
+                    <Heart size={16} strokeWidth={1.5} />
+                  </button>
+                </div>
+
               </div>
             </div>
 
-            {/* Info Tabs */}
-            <div className="space-y-6 pt-10 border-t border-brand-olive/10">
-              <div className="flex gap-8 border-b border-brand-olive/10 pb-4 overflow-x-auto no-scrollbar">
-                {['description', 'ingredients', 'benefits'].map((tab) => (
+            {/* Architectural Data Tabs */}
+            <div className="pt-4 space-y-6">
+              <div className="flex gap-6 border-b border-[#EAE6DF] pb-3 overflow-x-auto no-scrollbar">
+                {['description', 'ingredients', 'nutrition', 'preparation'].map((tab) => (
                   <button
                     key={tab}
                     onClick={() => setActiveTab(tab)}
-                    className={`text-[10px] font-black uppercase tracking-[0.25em] transition-all relative ${activeTab === tab ? 'text-brand-olive' : 'text-brand-olive/30 hover:text-brand-olive/60'}`}
+                    className={`text-[10px] font-bold uppercase tracking-[0.2em] transition-all relative pb-2 whitespace-nowrap ${
+                      activeTab === tab ? 'text-[#1C3B24]' : 'text-[#9A8F80] hover:text-[#1C2B21]'
+                    }`}
                   >
-                    {tab}
-                    {activeTab === tab && <div className="absolute -bottom-[17px] left-0 right-0 h-1 bg-brand-brown rounded-full" />}
+                    <span>{tab}</span>
+                    {activeTab === tab && (
+                      <motion.div 
+                        layoutId="activeTabLine"
+                        className="absolute bottom-0 left-0 right-0 h-[1.5px] bg-[#D9A036]" 
+                      />
+                    )}
                   </button>
                 ))}
               </div>
               
-              <div className="min-h-[120px]">
+              {/* Dynamic Information Display Deck */}
+              <div className="min-h-[140px]">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={activeTab}
-                    initial={{ opacity: 0, y: 10 }}
+                    initial={{ opacity: 0, y: 8 }}
                     animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    className="text-sm leading-relaxed text-brand-olive/70 font-medium"
+                    exit={{ opacity: 0, y: -8 }}
+                    transition={{ duration: 0.4, ease: premiumEase }}
+                    className="text-xs leading-relaxed text-[#5C665E] font-light"
                   >
                     {activeTab === 'description' && (
-                       <p>Experience the authentic taste of roasted gram, stone-ground to perfection. Our signature blend is rich in protein and fiber, making it the perfect natural energy booster for your daily routine.</p>
-                    )}
-                    {activeTab === 'ingredients' && (
                       <div className="space-y-4">
-                        <p className="text-[10px] font-black uppercase tracking-widest text-brand-brown">Natural Ingredients</p>
-                        <p>Roasted Gram (Sattu), Cumin Seeds, Black Salt, Dried Ginger, Mint Powder, Roasted Peanuts (optional trace).</p>
+                        <p className="text-sm font-serif font-light text-[#1C2B21] leading-relaxed">
+                          {product.description || 'Experience the authentic structural purity of premium sattu, hand-selected and native stone-ground to perfection to maximize raw biological availability.'}
+                        </p>
                       </div>
                     )}
-                    {activeTab === 'benefits' && (
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        {[
-                          { icon: <Zap size={14}/>, text: 'Instant Clean Energy' },
-                          { icon: <Shield size={14}/>, text: 'Superior Digestion' },
-                          { icon: <Leaf size={14}/>, text: 'Cooling for the Body' },
-                          { icon: <Coffee size={14}/>, text: 'Satisfyingly Filling' }
-                        ].map((b, i) => (
-                          <div key={i} className="flex items-center gap-3 text-xs font-bold text-brand-olive">
-                            <div className="text-brand-brown">{b.icon}</div>
-                            {b.text}
+                    
+                    {activeTab === 'ingredients' && (
+                      <div className="space-y-2">
+                        <div className="bg-white p-6 rounded-xl border border-[#EAE6DF] shadow-sm">
+                          <p className="font-serif italic text-[#1C2B21] text-sm">
+                            {product.ingredients || 'Native Roasted Gram (Chana Sattu), Hand-milled Barley, Mineralized Salt Crystals.'}
+                          </p>
+                        </div>
+                      </div>
+                    )}
+                    
+                    {activeTab === 'nutrition' && (
+                      <div className="space-y-2">
+                        <div className="bg-white p-6 rounded-xl border border-[#EAE6DF] shadow-sm font-mono text-[11px] text-[#1C2B21]/90 space-y-1 whitespace-pre-line">
+                          {product.nutritional_info || 'Per 100g serving concentration:\n▪ Macro Protein: 20g\n▪ Organic Fiber: 8g\n▪ Complex Carbohydrates: 55g\n▪ Native Lipids: 3g'}
+                        </div>
+                      </div>
+                    )}
+                    
+                    {activeTab === 'preparation' && (
+                      <div className="space-y-4">
+                        <div className="bg-white p-6 rounded-xl border border-[#EAE6DF] shadow-sm space-y-2">
+                          <p className="whitespace-pre-line font-serif italic text-[#1C2B21] text-sm leading-relaxed">
+                            {product.how_to_prepare || '1. Introduce 2 calibrated tablespoons of sattu to 1 glass of pristine cold water.\n2. Infuse natural jaggery or native sugar variants to desired sweet taste.\n3. Agitate dynamic suspension fluid thoroughly and serve at chilled equilibrium.'}
+                          </p>
+                        </div>
+                        
+                        {/* Elite Informational Notification Node Accent */}
+                        <div className="p-4 rounded-xl bg-white border border-[#EAE6DF] shadow-sm flex gap-4 items-start">
+                          <div className="w-8 h-8 rounded-lg bg-[#1C3B24]/5 text-[#1C3B24] flex items-center justify-center flex-shrink-0">
+                            <Maximize2 size={12} strokeWidth={1.5} />
                           </div>
-                        ))}
+                          <div className="space-y-0.5">
+                            <p className="text-[9px] font-bold uppercase tracking-widest text-[#1C3B24]">Apothecary Custom Protocol</p>
+                            <p className="text-[11px] text-[#5C665E] font-light leading-normal">Incorporate a single compression swipe of organic lime juice and black salt for premium physiological activation.</p>
+                          </div>
+                        </div>
                       </div>
                     )}
                   </motion.div>
                 </AnimatePresence>
               </div>
-            </div>
 
-            {/* Quick Tips */}
-            <div className="p-6 rounded-[32px] bg-brand-cream border border-brand-olive/10 flex gap-4 shadow-sm">
-              <div className="w-10 h-10 rounded-xl bg-white border border-brand-olive/10 flex items-center justify-center text-brand-brown flex-shrink-0 shadow-sm">
-                <Info size={20} />
-              </div>
-              <div>
-                <p className="text-[10px] font-black uppercase tracking-widest text-brand-olive">Pro Tip</p>
-                <p className="text-xs text-brand-olive/60 font-medium leading-relaxed">Add a squeeze of lemon and some finely chopped coriander for the ultimate refreshing experience!</p>
-              </div>
             </div>
           </div>
+
         </div>
       </div>
     </div>
