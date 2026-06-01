@@ -48,48 +48,46 @@ const flavors = [
 const FlavorCard = ({ flavor }) => {
   return (
     <motion.div
-      whileHover={{ y: -8 }}
-      transition={{ duration: 0.4, ease: [0.25, 1, 0.5, 1] }}
-      className="bg-white rounded-xl p-5 flex flex-col justify-between border border-[#D9D3C7] shadow-sm hover:shadow-[0_20px_50px_rgba(28,43,33,0.06)] transition-all duration-500 group h-full relative overflow-hidden"
+      whileHover={{ y: -5, scale: 1.02 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      className="bg-[#FDF6E9] p-4 flex flex-col justify-between h-full relative border-[3px] border-[#8B7355] shadow-[8px_8px_0px_0px_rgba(139,115,85,0.2)] hover:shadow-[12px_12px_0px_0px_rgba(139,115,85,0.3)] transition-all duration-300"
     >
+      {/* "Hand-stamped" corners */}
+      <div className="absolute top-1 left-1 w-4 h-4 border-t-2 border-l-2 border-[#5C4033]"></div>
+      <div className="absolute bottom-1 right-1 w-4 h-4 border-b-2 border-r-2 border-[#5C4033]"></div>
+      
       <div>
-        {/* Image Container with Luxury Scrim Overlays */}
-        <div className="w-full aspect-[4/5] rounded-lg overflow-hidden mb-6 relative bg-[#EFECE6] border border-[#EFECE6]">
-          {/* Subtle Category Micro Tag */}
-          <span className="absolute top-3 left-3 z-20 bg-[#1C3B24] text-[#EFECE6] font-sans text-xs font-bold tracking-widest uppercase px-2.5 py-1 rounded shadow-sm">
-            {flavor.tag}
-          </span>
-          
+        {/* Image Container with "Polaroid" or "Old Print" style */}
+        <div className="w-full aspect-[4/3] relative border-b-4 border-r-4 border-[#5C4033] bg-[#E5D3B3] p-2">
           <img 
             src={flavor.image} 
             alt={flavor.name}
-            className="w-full h-full object-cover grayscale opacity-90 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700 ease-out group-hover:scale-110"
+            className="w-full h-full object-cover grayscale-[20%] sepia-[10%]"
           />
-          {/* Warm organic brand tint overlay */}
-          <div className="absolute inset-0 bg-amber-950/5 mix-blend-multiply pointer-events-none group-hover:opacity-0 transition-opacity duration-500" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#1C2B21]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+          <div className="absolute inset-0 bg-[#8B5A2B]/10 mix-blend-multiply" />
         </div>
 
-        {/* Text Content Block */}
-        <div className="flex flex-col items-center text-center px-2">
-          <h3 className="text-xl lg:text-2xl font-serif font-bold text-[#1C2B21] tracking-tight group-hover:text-[#1C3B24] transition-colors duration-300 mb-1.5">
+        {/* Text Content */}
+        <div className="flex flex-col items-center text-center mt-6">
+          <h3 className="text-xl font-serif font-bold text-[#2D241E] mb-1">
             {flavor.name}
           </h3>
+          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#8B5A2B] italic mb-3">
+            {flavor.subtitle}
+          </p>
           
-          {/* Elegant structural separation rule */}
-          <div className="w-6 h-[1px] bg-[#D9A036] opacity-60 group-hover:w-12 transition-all duration-500 mb-3" />
-          
-          <p className="text-xs font-sans font-medium text-[#707A72] leading-relaxed tracking-wide group-hover:text-[#3E4A41] transition-colors duration-300">
-                {flavor.subtitle}
-              </p>
+          <div className="text-[10px] bg-[#2D241E] text-[#E5D3B3] px-3 py-1 font-mono tracking-widest uppercase">
+            {flavor.tag}
+          </div>
         </div>
       </div>
 
       {/* Button Module */}
-      <div className="w-full pt-6 mt-6 border-t border-[#EFECE6] flex justify-center">
-        <Link to="/shop" className="w-full bg-[#EFECE6] hover:bg-[#1C3B24] text-[#1C3B24] hover:text-white font-sans font-bold text-[10px] uppercase tracking-widest py-3 rounded-md flex items-center justify-center gap-2 transition-all duration-300 border border-[#D9D3C7]/60 hover:border-[#1C3B24]">
-          <span>Discover Profile</span>
-          <ArrowRight size={12} className="group-hover:translate-x-1.5 transition-transform duration-300" />
+      <div className="w-full pt-6 mt-4 flex justify-center">
+        <Link to="/shop" className="relative px-6 py-2 border-2 border-[#5C4033] hover:bg-[#5C4033] hover:text-[#FDF6E9] transition-colors duration-300">
+          <span className="font-serif font-bold text-xs uppercase">
+            Pick Harvest
+          </span>
         </Link>
       </div>
     </motion.div>
@@ -98,52 +96,65 @@ const FlavorCard = ({ flavor }) => {
 
 const FlavorsSection = () => {
   return (
-    <section className="py-24 bg-[#EFECE6] relative overflow-hidden border-t border-b border-[#D9D3C7]">
-      {/* Light Luxury Geometric Dot Mesh */}
-      <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[radial-gradient(#000_1px,transparent_1px)] [background-size:24px_24px]"></div>
+    <section 
+      className="py-24 relative overflow-hidden border-y border-[#D1B894]"
+      style={{ backgroundImage: "url('/img/b1.png')", backgroundSize: 'cover', backgroundPosition: 'center' }}
+    >
+      {/* Warm Traditional Overlay */}
+      <div className="absolute inset-0 bg-[#FDF8F1]/40 mix-blend-overlay pointer-events-none"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-[#1C2B21]/10 via-transparent to-[#1C2B21]/10 pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
         
         {/* Header Block Layout */}
         <div className="text-center mb-16 lg:mb-20 flex flex-col items-center">
-          <div className="flex items-center gap-2 mb-3">
-            <Sparkles size={12} className="text-[#D9A036]" />
-            <span className="text-[#D9A036] font-sans font-bold tracking-widest text-xs uppercase block">
-              5 Artisan Profiles
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            className="flex items-center gap-4 mb-4"
+          >
+            <div className="h-[1px] w-12 bg-[#D1B894]" />
+            <span className="text-[#D9A036] font-serif italic text-sm tracking-wide">
+              Established Heritage
             </span>
-            <Sparkles size={12} className="text-[#D9A036]" />
-          </div>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-[#1C2B21] tracking-tight max-w-2xl leading-tight">
-            Curated Formulations For Every Mood
+            <div className="h-[1px] w-12 bg-[#D1B894]" />
+          </motion.div>
+
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-extrabold text-[#1C2B21] tracking-tight max-w-3xl leading-[1.1] mb-6">
+            The Golden Standard of <span className="text-[#D9A036] italic">Indian Flavors</span>
           </h2>
-          <div className="w-12 h-[2px] bg-[#1C3B24] mt-5"></div>
+          
+          <div className="flex items-center gap-3">
+             <div className="w-1.5 h-1.5 rounded-full bg-[#D9A036]" />
+             <div className="w-24 h-[1px] bg-[#D9A036]" />
+             <div className="w-1.5 h-1.5 rounded-full bg-[#D9A036]" />
+          </div>
         </div>
 
-        {/* Full-width Swiper Slider for all devices */}
+        {/* Full-width Swiper Slider */}
         <div className="!-mr-6 md:!-mr-12">
           <Swiper
             modules={[Autoplay, Pagination, Mousewheel]}
-            spaceBetween={16}
-            slidesPerView={1.25}
+            spaceBetween={24}
+            slidesPerView={1.2}
             pagination={{ clickable: true }}
-            autoplay={{ delay: 4500, disableOnInteraction: false }}
+            autoplay={{ delay: 5000, disableOnInteraction: false }}
             mousewheel={{ forceToAxis: true }}
             breakpoints={{
-              480: { slidesPerView: 1.6 },
-              640: { slidesPerView: 2.2 },
-              768: { slidesPerView: 2.6 },
-              1024: { slidesPerView: 3.5 },
+              640: { slidesPerView: 2.1 },
+              768: { slidesPerView: 2.5 },
+              1024: { slidesPerView: 3.2 },
               1280: { slidesPerView: 4 },
             }}
-            className="pb-14 premium-flavor-swiper"
+            className="pb-16 premium-flavor-swiper"
           >
             {flavors.map((flavor, index) => (
-              <SwiperSlide key={flavor.id} className="h-full">
+              <SwiperSlide key={flavor.id} className="h-auto">
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: index * 0.1, duration: 0.8, ease: [0.25, 1, 0.5, 1] }}
+                  transition={{ delay: index * 0.1, duration: 0.8 }}
                 >
                   <FlavorCard flavor={flavor} />
                 </motion.div>
@@ -154,24 +165,23 @@ const FlavorsSection = () => {
 
       </div>
 
-      {/* Tailored Swiper Dots Custom Layout */}
       <style dangerouslySetInnerHTML={{__html: `
         .premium-flavor-swiper .swiper-pagination-bullet {
-          background: #1C3B24 !important;
-          opacity: 0.15;
-          width: 5px;
-          height: 5px;
+          background: #1C2B21 !important;
+          opacity: 0.1;
+          width: 8px;
+          height: 8px;
           transition: all 0.4s ease;
+          border: 1px solid #D9A036;
         }
         .premium-flavor-swiper .swiper-pagination-bullet-active {
           opacity: 1;
           background: #D9A036 !important;
-          width: 16px;
+          width: 24px;
           border-radius: 4px;
         }
         .premium-flavor-swiper .swiper-pagination {
           bottom: 0px !important;
-          text-align: center !important;
         }
       `}} />
 

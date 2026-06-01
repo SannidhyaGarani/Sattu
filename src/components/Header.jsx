@@ -14,17 +14,17 @@ const Header = () => {
   const { user } = useAuth();
   const { scrollY } = useScroll();
 
-  // Premium scroll transformations
-  const headerHeight = useTransform(scrollY, [0, 100], ['100px', '70px']);
+  // Premium scroll transformations - updated for traditional feel
+  const headerHeight = useTransform(scrollY, [0, 100], ['110px', '80px']);
   const headerBg = useTransform(
     scrollY,
     [0, 100],
-    ['rgba(243, 236, 225, 0)', 'rgba(243, 236, 225, 0.98)']
+    ['rgba(28, 59, 36, 0)', 'rgba(28, 59, 36, 0.98)']
   );
   const headerShadow = useTransform(
     scrollY,
     [0, 100],
-    ['0px 0px 0px rgba(0,0,0,0)', '0px 4px 20px rgba(44, 36, 30, 0.06)']
+    ['0px 0px 0px rgba(0,0,0,0)', '0px 6px 20px rgba(28, 43, 33, 0.15)']
   );
   const logoScale = useTransform(scrollY, [0, 100], [1, 0.9]);
 
@@ -77,70 +77,75 @@ const Header = () => {
   ];
 
   return (
-    <header className="fixed top-0 left-0 w-full z-[100]">
-      {/* Premium Announcement Bar */}
-      <div className="bg-[#415345] text-[#FDFBF7] py-2 px-4 overflow-hidden relative border-b border-white/5">
+    <header className="fixed top-0 left-0 w-full z-[100] border-b-4 border-[#8B7355] shadow-lg">
+      {/* Village Style Announcement Bar */}
+      <div className="bg-[#1C3B24] text-[#FDFBF7] py-2.5 px-4 overflow-hidden relative border-b border-[#FDFBF7]/5">
+        {/* Stamp Aesthetic Decoration */}
+        <div className="absolute top-1/2 left-3 -translate-y-1/2 w-4 h-4 border-t-2 border-l-2 border-[#D9A036] rounded-tl-sm pointer-events-none"></div>
+        <div className="absolute top-1/2 right-3 -translate-y-1/2 w-4 h-4 border-b-2 border-r-2 border-[#D9A036] rounded-br-sm pointer-events-none"></div>
+        
         <motion.div 
           animate={{ x: [0, -1000] }}
           transition={{ repeat: Infinity, duration: 25, ease: "linear" }}
-          className="flex gap-16 whitespace-nowrap items-center text-[10px] md:text-[11px] font-bold tracking-[0.2em] uppercase"
+          className="flex gap-16 whitespace-nowrap items-center text-[10px] md:text-[11px] font-bold tracking-[0.25em] uppercase font-serif italic"
         >
-          <span className="flex items-center gap-2"><Leaf size={14} className="text-[#DECFC0]" /> 100% Natural Ingredients</span>
-          <span className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-[#DECFC0]" /> No Preservatives</span>
-          <span className="flex items-center gap-2">💪 High Protein & Fiber</span>
-          <span className="flex items-center gap-2">🚚 Delivered Across India</span>
+          <span className="flex items-center gap-2 grayscale-[20%] sepia-[10%]"><Leaf size={14} className="text-[#D9A036]" /> 100% Natural Ingredients</span>
+          <span className="flex items-center gap-2 grayscale-[20%] sepia-[10%]"><div className="w-2 h-2 rounded-sm bg-[#D9A036]" /> No Preservatives</span>
+          <span className="flex items-center gap-2 grayscale-[20%] sepia-[10%]">💪 High Protein & Fiber</span>
+          <span className="flex items-center gap-2 grayscale-[20%] sepia-[10%]">🚚 Delivered Across India</span>
           {/* Duplicates for seamless loop */}
-          <span className="flex items-center gap-2"><Leaf size={14} className="text-[#DECFC0]" /> 100% Natural Ingredients</span>
-          <span className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-[#DECFC0]" /> No Preservatives</span>
-          <span className="flex items-center gap-2">💪 High Protein & Fiber</span>
-          <span className="flex items-center gap-2">🚚 Delivered Across India</span>
+          <span className="flex items-center gap-2 grayscale-[20%] sepia-[10%]"><Leaf size={14} className="text-[#D9A036]" /> 100% Natural Ingredients</span>
+          <span className="flex items-center gap-2 grayscale-[20%] sepia-[10%]"><div className="w-2 h-2 rounded-sm bg-[#D9A036]" /> No Preservatives</span>
+          <span className="flex items-center gap-2 grayscale-[20%] sepia-[10%]">💪 High Protein & Fiber</span>
+          <span className="flex items-center gap-2 grayscale-[20%] sepia-[10%]">🚚 Delivered Across India</span>
         </motion.div>
       </div>
 
-      {/* Main Glassmorphism Navbar */}
+      {/* Main Village Aesthetic Navbar with Heavy Frames */}
       <motion.nav 
         style={{ 
           height: headerHeight,
           backgroundColor: headerBg,
           boxShadow: headerShadow,
-          backdropFilter: 'blur(12px)'
+          backdropFilter: 'blur(10px)' // reduced blur for rustic feel
         }}
-        className="px-6 md:px-12 flex items-center transition-all duration-300"
+        className="px-6 md:px-12 flex items-center transition-all duration-300 bg-[#E5D3B3]" // light parchment background as base
       >
         <div className="max-w-7xl mx-auto w-full flex items-center justify-between">
           
-          {/* Logo with dynamic scale */}
+          {/* Logo with dynamic scale - Redesigned Village Style */}
           <motion.div style={{ scale: logoScale }}>
-            <Link to="/" className="flex items-center gap-3 group relative z-[110]">
-              <div className="w-11 h-11 bg-[#4A5D4E] rounded-full flex items-center justify-center text-[#FDFBF7] transition-all duration-500 group-hover:rotate-[360deg] shadow-lg shadow-[#4A5D4E]/20">
-                <Leaf size={22} />
+            <Link to="/" className="flex items-center gap-4 group relative z-[110]">
+              {/* Asymmetrical "Farm Cut" logo container */}
+              <div className="w-12 h-12 bg-[#1C3B24] rounded-tl-3xl rounded-br-3xl flex items-center justify-center text-[#D9A036] transition-all duration-500 group-hover:rotate-[360deg] shadow-lg shadow-[#1C3B24]/20 border-2 border-[#5C4033]">
+                <Leaf size={24} strokeWidth={2} />
               </div>
-              <div className="flex flex-col -space-y-1">
-                <span className="text-2xl font-bold tracking-tight text-[#4A5D4E]">SATTU</span>
-                <div className="flex items-center gap-1">
-                  <div className="h-[1px] w-2 bg-[#6D4C3D]/40" />
-                  <span className="text-[9px] tracking-[0.4em] font-bold text-[#6D4C3D] uppercase">Drink</span>
-                  <div className="h-[1px] w-2 bg-[#6D4C3D]/40" />
+              <div className="flex flex-col -space-y-1.5">
+                <span className="text-3xl font-serif font-extrabold text-[#1C2B21] tracking-tight group-hover:text-[#1C3B24] transition-colors">SATTU</span>
+                <div className="flex items-center gap-1.5">
+                  <div className="h-[2px] w-3 bg-[#8B7355]" />
+                  <span className="text-[10px] tracking-[0.4em] font-bold text-[#8B7355] uppercase font-sans">Drink</span>
+                  <div className="h-[2px] w-3 bg-[#8B7355]" />
                 </div>
               </div>
             </Link>
           </motion.div>
 
-          {/* Desktop Navigation - Minimalist & Premium */}
+          {/* Desktop Navigation - Minimalist Village Feel */}
           <div className="hidden lg:flex items-center gap-2">
             {navLinks.map((link) => (
               <Link 
                 key={link.name} 
                 to={link.path}
-                className="px-5 py-2 text-[12px] font-bold uppercase tracking-widest text-[#4A5D4E] relative group"
+                className="px-6 py-2.5 text-[12px] font-bold uppercase tracking-widest text-[#1C2B21] relative group border border-transparent hover:border-[#8B7355]/40 transition-all rounded-sm"
               >
-                <span className="relative z-10 transition-colors duration-300 group-hover:text-[#6D4C3D]">{link.name}</span>
-                {/* Premium Hover Underline */}
-                <span className="absolute bottom-1 left-1/2 w-0 h-[2px] bg-[#6D4C3D] transition-all duration-300 -translate-x-1/2 group-hover:w-1/2" />
+                <span className="relative z-10 transition-colors duration-300 group-hover:text-[#1C3B24]">{link.name}</span>
+                {/* Traditional Hover Ink Underline */}
+                <span className="absolute bottom-1.5 left-1/2 w-0 h-[3px] bg-[#D9A036] transition-all duration-300 -translate-x-1/2 group-hover:w-[70%] rounded-md" />
                 {location.pathname === link.path && (
                   <motion.span 
                     layoutId="activeNav"
-                    className="absolute inset-0 bg-[#4A5D4E]/5 rounded-full -z-0"
+                    className="absolute inset-0 bg-[#D9A036]/10 rounded-sm -z-0 border-asymmetrical" // subtle active background with cut corners
                     transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
                   />
                 )}
@@ -148,55 +153,55 @@ const Header = () => {
             ))}
           </div>
 
-          {/* Icons - Interactive & Animated */}
-          <div className="flex items-center gap-1 md:gap-3 relative z-[110]">
+          {/* Icons - Interactive, Sepia Toned & Traditional */}
+          <div className="flex items-center gap-1.5 md:gap-4 relative z-[110]">
             <motion.button 
-              whileHover={{ scale: 1.1, backgroundColor: 'rgba(74, 93, 78, 0.05)' }}
+              whileHover={{ scale: 1.1, backgroundColor: 'rgba(28, 59, 36, 0.05)' }}
               whileTap={{ scale: 0.95 }}
-              className="text-[#4A5D4E] p-2.5 rounded-full transition-all hidden sm:block"
+              className="text-[#1C3B24] p-3 rounded-full transition-all hidden sm:block grayscale-[15%] sepia-[10%] hover:grayscale-0 hover:sepia-0"
             >
-              <Search size={20} strokeWidth={2.5} />
+              <Search size={21} strokeWidth={2.5} />
             </motion.button>
-            <Link to="/wishlist" className="relative group">
+            <Link to="/wishlist" className="relative group grayscale-[15%] sepia-[10%] hover:grayscale-0 hover:sepia-0">
               <motion.div
-                whileHover={{ scale: 1.1, backgroundColor: 'rgba(74, 93, 78, 0.05)' }}
+                whileHover={{ scale: 1.1, backgroundColor: 'rgba(28, 59, 36, 0.05)' }}
                 whileTap={{ scale: 0.95 }}
-                className="text-[#4A5D4E] p-2.5 rounded-full transition-all hidden sm:block"
+                className="text-[#1C3B24] p-3 rounded-full transition-all hidden sm:block"
               >
-                <Heart size={20} strokeWidth={2.5} />
+                <Heart size={21} strokeWidth={2.5} />
               </motion.div>
               {wishlistCount > 0 && (
                 <motion.span
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
-                  className="absolute -top-1 -right-1 bg-[#D9A036] text-[#FDFBF7] text-[9px] font-black w-5 h-5 rounded-full flex items-center justify-center shadow-lg border-2 border-[#FDFBF7]"
+                  className="absolute -top-1.5 -right-1.5 bg-[#D9A036] text-[#FDFBF7] text-[10px] font-black w-6 h-6 rounded-full flex items-center justify-center shadow-lg border-2 border-[#5C4033]"
                 >
                   {wishlistCount}
                 </motion.span>
               )}
             </Link>
-            <Link to="/account">
+            <Link to="/account" className="grayscale-[15%] sepia-[10%] hover:grayscale-0 hover:sepia-0">
               <motion.div
-                whileHover={{ scale: 1.1, backgroundColor: 'rgba(74, 93, 78, 0.05)' }}
+                whileHover={{ scale: 1.1, backgroundColor: 'rgba(28, 59, 36, 0.05)' }}
                 whileTap={{ scale: 0.95 }}
-                className="text-[#4A5D4E] p-2.5 rounded-full transition-all"
+                className="text-[#1C3B24] p-3 rounded-full transition-all"
               >
-                <User size={20} strokeWidth={2.5} />
+                <User size={21} strokeWidth={2.5} />
               </motion.div>
             </Link>
-            <Link to="/cart" className="relative group">
+            <Link to="/cart" className="relative group grayscale-[15%] sepia-[10%] hover:grayscale-0 hover:sepia-0">
               <motion.div
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
-                className="text-[#4A5D4E] p-2.5 bg-[#4A5D4E]/5 rounded-full transition-all"
+                className="text-[#1C3B24] p-3 bg-[#1C3B24]/5 rounded-sm transition-all border-b-2 border-r-2 border-[#8B7355]/40"
               >
-                <ShoppingCart size={22} strokeWidth={2.5} />
+                <ShoppingCart size={23} strokeWidth={2.5} />
               </motion.div>
               {cartCount > 0 && (
                 <motion.span 
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
-                  className="absolute -top-1 -right-1 bg-[#D9A036] text-[#FDFBF7] text-[9px] font-black w-5 h-5 rounded-full flex items-center justify-center shadow-lg border-2 border-[#FDFBF7]"
+                  className="absolute -top-1.5 -right-1.5 bg-[#D9A036] text-[#FDFBF7] text-[10px] font-black w-6 h-6 rounded-full flex items-center justify-center shadow-lg border-2 border-[#5C4033]"
                 >
                   {cartCount}
                 </motion.span>
@@ -204,16 +209,16 @@ const Header = () => {
             </Link>
             <motion.button 
               whileTap={{ scale: 0.9 }}
-              className="lg:hidden text-[#4A5D4E] p-2 ml-2"
+              className="lg:hidden text-[#1C3B24] p-2.5 ml-2.5"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
-              {isMobileMenuOpen ? <X size={28} strokeWidth={2.5} /> : <Menu size={28} strokeWidth={2.5} />}
+              {isMobileMenuOpen ? <X size={30} strokeWidth={2.5} /> : <Menu size={30} strokeWidth={2.5} />}
             </motion.button>
           </div>
         </div>
       </motion.nav>
 
-      {/* Full-Screen Premium Mobile Menu */}
+      {/* Full-Screen Village Style Mobile Menu with Traditional Frames */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
@@ -221,9 +226,13 @@ const Header = () => {
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-            className="fixed inset-0 bg-[#FDFBF7] z-[90] flex flex-col p-10 pt-40 lg:hidden"
+            className="fixed inset-0 bg-[#FDFBF7] z-[90] flex flex-col p-10 pt-48 lg:hidden"
           >
-            <div className="flex flex-col gap-8">
+            {/* Ink Stamp Corner Decorations for Traditional Feel */}
+            <div className="absolute top-4 right-4 w-6 h-6 border-t-2 border-r-2 border-[#D9A036] rounded-tr-sm pointer-events-none grayscale-[20%] sepia-[10%]"></div>
+            <div className="absolute bottom-4 left-4 w-6 h-6 border-b-2 border-l-2 border-[#D9A036] rounded-bl-sm pointer-events-none grayscale-[20%] sepia-[10%]"></div>
+
+            <div className="flex flex-col gap-10">
               {navLinks.map((link, idx) => (
                 <motion.div
                   key={link.name}
@@ -233,29 +242,30 @@ const Header = () => {
                 >
                   <Link 
                     to={link.path}
-                    className="text-5xl font-bold text-[#4A5D4E] hover:text-[#6D4C3D] transition-colors flex items-center gap-4 group"
+                    className="text-6xl md:text-7xl font-serif font-extrabold text-[#1C2B21] hover:text-[#D9A036] transition-colors flex items-end gap-6 group tracking-tight"
                   >
-                    <span className="text-sm font-black text-[#6D4C3D]/30">0{idx + 1}</span>
+                    <span className="text-xl md:text-2xl font-black text-[#D9A036] font-mono">0{idx + 1}</span>
                     {link.name}
                   </Link>
                 </motion.div>
               ))}
             </div>
 
-            <div className="mt-auto flex flex-col gap-8">
-               <div className="grid grid-cols-2 gap-4">
-                  <motion.div whileTap={{ scale: 0.95 }}>
-                    <Link to="/account" className="w-full py-5 bg-[#4A5D4E] text-[#FDFBF7] rounded-2xl flex items-center justify-center font-black uppercase tracking-widest text-xs">
+            <div className="mt-auto flex flex-col gap-10 pt-16 border-t-2 border-[#8B7355]/20">
+               {/* Asymmetrical "Farm Cut" button frames */}
+               <div className="grid grid-cols-2 gap-5">
+                  <motion.div whileTap={{ scale: 0.95 }} className="w-full h-16 rounded-tl-3xl rounded-br-3xl bg-[#1C3B24] flex items-center justify-center border-2 border-[#5C4033] shadow-lg shadow-[#1C3B24]/20 hover:scale-[1.02] transition-transform">
+                    <Link to="/account" className="text-[#E5D3B3] font-sans font-bold uppercase tracking-[0.25em] text-[11px]">
                       My Profile
                     </Link>
                   </motion.div>
-                  <motion.div whileTap={{ scale: 0.95 }}>
-                    <Link to="/contact" className="w-full py-5 border-2 border-[#4A5D4E] text-[#4A5D4E] rounded-2xl flex items-center justify-center font-black uppercase tracking-widest text-xs">
+                  <motion.div whileTap={{ scale: 0.95 }} className="w-full h-16 border-2 border-[#1C3B24] rounded-tl-3xl rounded-br-3xl flex items-center justify-center bg-transparent hover:scale-[1.02] transition-transform">
+                    <Link to="/contact" className="text-[#1C3B24] font-sans font-bold uppercase tracking-[0.25em] text-[11px]">
                       Support
                     </Link>
                   </motion.div>
                </div>
-               <div className="flex justify-between items-center text-[#4A5D4E]/40 text-[10px] uppercase font-black tracking-[0.2em]">
+               <div className="flex justify-between items-center text-[#8B7355] text-[11px] font-medium tracking-[0.2em] font-sans uppercase">
                  <span>© 2026 Sattu Drink Premium</span>
                  <div className="flex gap-4">
                     <Leaf size={16} />
@@ -266,6 +276,21 @@ const Header = () => {
           </motion.div>
         )}
       </AnimatePresence>
+
+      <style jsx global>{`
+        .grayscale-[20%] {
+          filter: grayscale(20%) sepia(10%);
+        }
+        .grayscale-[15%] {
+          filter: grayscale(15%) sepia(10%);
+        }
+        .border-asymmetrical {
+          border-radius: 4px; /* Default small radius for modern active bg */
+          /* Traditional "Village Cut" Corners */
+          border-top-left-radius: 12px;
+          border-bottom-right-radius: 12px;
+        }
+      `}</style>
     </header>
   );
 };

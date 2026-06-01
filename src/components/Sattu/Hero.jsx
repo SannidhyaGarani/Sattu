@@ -1,150 +1,137 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Zap, Dumbbell, ArrowRight, Leaf } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { motion } from "framer-motion";
+import {
+  ArrowRight,
+  Leaf,
+  Zap,
+  Dumbbell,
+  ShieldCheck,
+} from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Hero = () => {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.2
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 25 },
-    visible: { 
-      opacity: 1, 
-      y: 0,
-      transition: { duration: 0.7, ease: [0.215, 0.610, 0.355, 1] }
-    }
-  };
-
   return (
-    <section className="relative min-h-screen w-full flex items-center justify-center bg-[#F3ECE1] pt-32 md:pt-40 pb-16 px-6 md:px-12 lg:px-24 overflow-hidden select-none">
-      
-      {/* ================= PREMIUM BACKGROUND LAYER ================= */}
-      {/* Dynamically utilizes the minimalist layout matching the generated asset */}
-      <div 
-        className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-95 mix-blend-normal pointer-events-none"
-        style={{ 
-          backgroundImage: `url('img/sattu1.png')`, // Fallback high-res organic paper base texture
-        }}
-      >
-        {/* Soft layout overlay gradient to ensure clean, readable text positioning on the left */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#F3ECE1]/70 via-[#F3ECE1]/30 to-transparent w-1/2" />
-      </div>
+    <section
+      className="relative overflow-hidden min-h-screen flex items-center border-b border-[#D9D3C7]"
+      style={{
+        backgroundImage: "url('/img/sattu1.png')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+      {/* Overlay - adjusted for a clean side-aligned layout */}
+      <div className="absolute inset-0 bg-gradient-to-r from-[#FDF6E9] via-[#FDF6E9]/80 to-transparent" />
 
-      {/* Embedded Render of the generated right-aligned background asset layout */}
-     
+      {/* Decorative Corners */}
+      <div className="absolute top-6 left-6 w-8 h-8 border-l-2 border-t-2 border-[#D9A036]" />
+      <div className="absolute top-6 right-6 w-8 h-8 border-r-2 border-t-2 border-[#D9A036]" />
+      <div className="absolute bottom-6 left-6 w-8 h-8 border-l-2 border-b-2 border-[#D9A036]" />
+      <div className="absolute bottom-6 right-6 w-8 h-8 border-r-2 border-b-2 border-[#D9A036]" />
 
-      <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
-        
-        {/* ================= LEFT COLUMN: HERO CONTENT ================= */}
-        <motion.div 
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="lg:col-span-7 flex flex-col justify-center text-[#2D231D]"
-        >
-          {/* Main Typographic Headline */}
-          <motion.h1 
-            variants={itemVariants} 
-            className="text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight leading-[1.08] text-[#2C241E]"
+      <div className="relative z-10 max-w-[1440px] mx-auto px-6 lg:px-12 py-24 w-full">
+        <div className="max-w-2xl">
+          {/* LEFT CONTENT */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
           >
-            Fuel Your Day.<br />
-            The <span className="text-[#415345] font-serif italic font-normal tracking-wide relative inline-block">
-              Natural
-              <svg className="absolute -bottom-2 left-0 w-full h-2 text-[#415345]/40" viewBox="0 0 100 10" preserveAspectRatio="none">
-                <path d="M0,5 Q50,10 100,5" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
-              </svg>
-            </span> Way.
-          </motion.h1>
+            {/* Top Badge */}
+            <div className="inline-flex items-center gap-2 border border-[#D9A036]/40 bg-[#FDF6E9] px-4 py-2 mb-8">
+              <Leaf size={14} className="text-[#D9A036]" />
+              <span className="text-[10px] uppercase tracking-[0.25em] font-bold text-[#D9A036]">
+                Handcrafted Nutrition
+              </span>
+            </div>
 
-          {/* Premium Subtitle Description */}
-          <motion.p 
-            variants={itemVariants} 
-            className="mt-8 text-base sm:text-lg text-[#5A5047] max-w-lg font-medium leading-relaxed"
-          >
-            Instant Sattu Mix made with 100% natural ingredients for clean energy, strength & better you.
-          </motion.p>
+            {/* Heading */}
+            <h1 className="text-5xl md:text-7xl font-serif font-bold text-[#1C2B21] leading-[1.05]">
+              Tradition In
+              <br />
+              Every Sip.
+              <span className="block text-[#D9A036] italic font-normal mt-3">
+                Strength In Every Day.
+              </span>
+            </h1>
 
-          {/* Feature Badges Grid */}
-          <motion.div 
-            variants={itemVariants} 
-            className="grid grid-cols-3 gap-4 max-w-xl mt-10 pt-8 border-t border-[#DECFC0]"
-          >
-            {/* Badge 1 */}
-            <div className="flex flex-col items-start gap-2.5">
-              <div className="w-10 h-10 rounded-full bg-[#E5DBD0] flex items-center justify-center text-[#3B4A3D] shadow-sm">
-                <Zap size={18} strokeWidth={2.5} />
+            {/* Description */}
+            <p className="mt-8 text-lg text-[#5E564B] max-w-xl leading-relaxed">
+              Crafted from premium roasted gram and natural ingredients,
+              our Instant Sattu Mix delivers authentic taste, lasting energy,
+              and wholesome nutrition inspired by generations of tradition.
+            </p>
+
+            {/* Quote */}
+            <div className="mt-8 pl-5 border-l-2 border-[#D9A036]">
+              <p className="italic text-[#6B5D4A]">
+                "A timeless Indian superfood trusted for strength,
+                nourishment and vitality."
+              </p>
+            </div>
+
+            {/* Feature Cards */}
+            <div className="grid grid-cols-3 gap-4 mt-10">
+              <div className="bg-[#FDF6E9]/80 backdrop-blur-sm border-2 border-[#D9D3C7] p-4">
+                <Zap className="text-[#D9A036]" size={20} />
+                <p className="text-[11px] uppercase tracking-widest font-bold mt-3 text-[#1C2B21]">
+                  Clean Energy
+                </p>
               </div>
-              <span className="text-xs font-bold uppercase tracking-wider text-[#2C241E]">Clean Energy</span>
-            </div>
 
-            {/* Badge 2 */}
-            <div className="flex flex-col items-start gap-2.5">
-              <div className="w-10 h-10 rounded-full bg-[#E5DBD0] flex items-center justify-center text-[#3B4A3D] shadow-sm">
-                <Dumbbell size={18} strokeWidth={2.5} />
+              <div className="bg-[#FDF6E9]/80 backdrop-blur-sm border-2 border-[#D9D3C7] p-4">
+                <Dumbbell className="text-[#D9A036]" size={20} />
+                <p className="text-[11px] uppercase tracking-widest font-bold mt-3 text-[#1C2B21]">
+                  Strength
+                </p>
               </div>
-              <span className="text-xs font-bold uppercase tracking-wider text-[#2C241E]">Builds Strength</span>
-            </div>
 
-            {/* Badge 3 */}
-            <div className="flex flex-col items-start gap-2.5">
-              <div className="w-10 h-10 rounded-full bg-[#E5DBD0] flex items-center justify-center text-[#3B4A3D] shadow-sm">
-                <span className="text-lg">🫁</span>
+              <div className="bg-[#FDF6E9]/80 backdrop-blur-sm border-2 border-[#D9D3C7] p-4">
+                <ShieldCheck className="text-[#D9A036]" size={20} />
+                <p className="text-[11px] uppercase tracking-widest font-bold mt-3 text-[#1C2B21]">
+                  Natural
+                </p>
               </div>
-              <span className="text-xs font-bold uppercase tracking-wider text-[#2C241E]">Aids Digestion</span>
+            </div>
+
+            {/* Buttons */}
+            <div className="flex flex-wrap gap-4 mt-10">
+              <Link
+                to="/shop"
+                className="px-8 py-4 bg-[#1C3B24] text-white font-bold uppercase tracking-[0.2em] flex items-center gap-3 hover:bg-[#D9A036] transition-all duration-500"
+              >
+                Shop Collection
+                <ArrowRight size={16} />
+              </Link>
+
+              <Link
+                to="/shop"
+                className="px-8 py-4 border-2 border-[#1C3B24] text-[#1C3B24] font-bold uppercase tracking-[0.2em] hover:bg-[#1C3B24] hover:text-white transition-all duration-500"
+              >
+                Explore Flavours
+              </Link>
             </div>
           </motion.div>
-
-          {/* Call To Actions */}
-          <motion.div variants={itemVariants} className="flex flex-wrap items-center gap-6 mt-10">
-            <Link to="/shop" className="px-9 py-4 bg-[#3B4A3D] text-[#FAF8F5] rounded-xl font-bold hover:bg-[#2D382E] transition-all duration-300 flex items-center gap-3 group tracking-wider text-xs uppercase shadow-lg shadow-[#3B4A3D]/15">
-              SHOP NOW <ArrowRight size={15} className="group-hover:translate-x-1.5 transition-transform duration-300" />
-            </Link>
-            <Link to="/shop" className="px-7 py-4 bg-transparent text-[#2C241E] font-bold hover:bg-black/5 rounded-xl transition-all duration-300 tracking-wider text-xs uppercase border border-[#2C241E]/20">
-              EXPLORE FLAVOURS
-            </Link>
-          </motion.div>
-        </motion.div>
-
-        {/* ================= RIGHT COLUMN: INTERACTIVE PREMIUM JAR ================= */}
-        <div className="lg:col-span-5 relative w-full h-[520px] md:h-[600px] flex items-center justify-center mt-12 lg:mt-0">
-          
-          {/* Main Foreground Component: Premium Elaichi Sattu Jar */}
-          <motion.div 
-            initial={{ opacity: 0, y: 35, rotate: -2 }}
-            animate={{ opacity: 1, y: 0, rotate: 4 }}
-            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-            className="relative z-20 w-[260px] sm:w-[300px] md:w-[320px] transform origin-bottom filter drop-shadow-[20px_30px_25px_rgba(44,36,30,0.25)] hover:rotate-[2deg] transition-transform duration-700 ease-out"
-          >
-            {/* The Physical Jar Render Structure */}
-            
-          </motion.div>
-
-          {/* Floating Pure Nutrition Stamp Overlay */}
-          <motion.div 
-            animate={{ rotate: 360 }}
-            transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-            className="absolute top-4 right-4 md:right-8 z-30 w-28 h-28 rounded-full border border-[#2C241E]/15 bg-[#F3ECE1]/50 backdrop-blur-[3px] flex items-center justify-center p-1.5 pointer-events-none"
-          >
-            <div className="w-full h-full rounded-full border border-dashed border-[#2C241E]/25 flex flex-col items-center justify-center text-center">
-              <span className="text-[6.5px] font-bold uppercase tracking-[0.15em] text-[#61564D]">Real Ingredients</span>
-              <span className="text-xs font-black text-[#29221D] tracking-tight my-0.5 uppercase leading-none">Pure<br />Nutrition</span>
-              <span className="text-[6.5px] font-bold uppercase tracking-[0.15em] text-[#61564D]">Real Results</span>
-            </div>
-          </motion.div>
-
         </div>
-
       </div>
+
+      {/* Premium Seal - Repositioned */}
+      <motion.div
+        animate={{ rotate: 360 }}
+        transition={{
+          duration: 25,
+          repeat: Infinity,
+          ease: "linear",
+        }}
+        className="absolute top-24 right-12 z-20 w-28 h-28 rounded-full border border-[#D9A036] bg-[#FDF6E9]/60 backdrop-blur-md flex items-center justify-center hidden lg:flex"
+      >
+        <div className="w-24 h-24 rounded-full border border-dashed border-[#D9A036] flex items-center justify-center text-center">
+          <span className="text-[10px] uppercase font-bold tracking-wider text-[#1C2B21] leading-tight">
+            Pure
+            <br />
+            Nutrition
+          </span>
+        </div>
+      </motion.div>
     </section>
   );
 };
