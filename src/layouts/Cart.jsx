@@ -12,6 +12,8 @@ const Cart = () => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
+  const premiumEase = [0.215, 0.61, 0.355, 1];
+
   useEffect(() => {
     const load = async () => {
       if (!user) {
@@ -45,37 +47,37 @@ const Cart = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#EFECE6] flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#1C3B24]"></div>
+      <div className="min-h-screen bg-[#FBF9F6] flex items-center justify-center">
+        <div className="w-10 h-[1px] bg-[#D4B27A] animate-pulse"></div>
       </div>
     );
   }
 
   if (!user) {
     return (
-      <div className="min-h-screen bg-[#EFECE6]">
+      <div className="min-h-screen bg-[#FBF9F6]">
         <PageHeader
-          title="Your Cart"
-          subtitle="Shopping Bag"
+          title="Selection Manifest"
+          subtitle="Your Curated Bag"
           breadcrumbItems={[
             { label: "Home", path: "/" },
-            { label: "Cart" },
+            { label: "Selection" },
           ]}
         />
-        <div className="py-24 px-6">
-          <div className="bg-white p-12 rounded-3xl border border-[#D9D3C7] shadow-[0_20px_50px_rgba(28,43,33,0.05)] max-w-md w-full text-center mx-auto">
-            <div className="w-20 h-20 bg-[#EFECE6] border border-[#D9D3C7] rounded-3xl flex items-center justify-center mx-auto mb-8 text-[#707A72]">
-              <ShoppingBag size={40} />
+        <div className="py-24 px-6 relative z-10">
+          <div className="bg-[#0A1E13] p-16 text-center max-w-xl mx-auto shadow-2xl">
+            <div className="w-20 h-20 bg-white/5 border border-white/10 flex items-center justify-center mx-auto mb-10 text-[#D4B27A]">
+              <ShoppingBag size={32} strokeWidth={1} />
             </div>
-            <h2 className="text-2xl font-serif font-bold text-[#1C2B21] mb-4 text-center">
-              Your Cart Awaits
+            <h2 className="text-3xl font-serif font-light text-[#FBF9F6] mb-6">
+              Authentication Required
             </h2>
-            <p className="text-[#707A72] font-medium mb-8">
-              Sign in to view your selection and proceed to a seamless checkout.
+            <p className="text-[#FBF9F6]/40 text-xs font-light uppercase tracking-[0.2em] mb-10 leading-relaxed">
+              Sign in to synchronize your organic selections and proceed to a seamless, premium checkout.
             </p>
             <Link
               to="/login"
-              className="block w-full py-4 bg-[#1C3B24] text-white rounded-2xl font-bold hover:bg-[#112517] transition-all shadow-lg shadow-[#1C3B24]/20"
+              className="block w-full py-5 bg-[#D4B27A] text-[#0A1E13] font-bold text-[10px] uppercase tracking-[0.4em] hover:bg-[#FBF9F6] transition-all"
             >
               Sign In
             </Link>
@@ -86,127 +88,147 @@ const Cart = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#EFECE6]">
+    <div className="min-h-screen bg-[#FBF9F6] selection:bg-[#0A1E13] selection:text-[#FBF9F6]">
       <PageHeader
-        title="Your Cart"
-        subtitle="Shopping Bag"
+        title="Selection Manifest"
+        subtitle="Your Curated Bag"
         backUrl="/shop"
         breadcrumbItems={[
           { label: "Home", path: "/" },
-          { label: "Shop", path: "/shop" },
-          { label: "Cart" },
+          { label: "Collection", path: "/shop" },
+          { label: "Manifest" },
         ]}
       />
 
-      <div className="max-w-7xl mx-auto px-6 md:px-12 py-12">
-        <div className="flex flex-col lg:flex-row gap-12">
+      <div className="max-w-8xl mx-auto px-6 md:px-12 lg:px-16 py-12 relative z-10 pb-32">
+        <div className="flex flex-col lg:flex-row gap-20 items-start">
           {/* Main Cart Area */}
-          <div className="flex-1">
+          <div className="flex-1 w-full">
             {items.length === 0 ? (
-              <div className="bg-white rounded-3xl border border-dashed border-[#D9D3C7] p-16 text-center">
-                <ShoppingBag size={48} className="mx-auto text-[#707A72] mb-6" />
-                <p className="text-[#707A72] font-serif text-lg">
-                  Your cart is currently empty.
+              <div className="py-32 border border-[#0A1E13]/5 text-center px-6">
+                <ShoppingBag size={40} strokeWidth={1} className="mx-auto text-[#0A1E13]/10 mb-8" />
+                <h3 className="text-2xl font-serif font-light text-[#0A1E13] mb-4">Your manifest is clear</h3>
+                <p className="text-[#0A1E13]/40 text-[10px] uppercase tracking-[0.3em] mb-12">
+                  No organic formulations have been allocated to your bag.
                 </p>
                 <Link
                   to="/shop"
-                  className="inline-block mt-8 px-10 py-4 bg-[#1C3B24] text-white rounded-2xl font-bold hover:bg-[#112517] transition-all shadow-lg shadow-[#1C3B24]/20"
+                  className="inline-block px-12 py-5 bg-[#0A1E13] text-[#FBF9F6] font-bold text-[10px] uppercase tracking-[0.4em] hover:bg-[#D4B27A] transition-all"
                 >
                   Discover Collection
                 </Link>
               </div>
             ) : (
-              <div className="space-y-6">
-                {items.map((item) => (
-                  <div
-                    key={item.id}
-                    className="group relative bg-white rounded-3xl p-6 flex flex-col sm:flex-row items-center gap-8 transition-all duration-500 hover:shadow-[0_20px_60px_rgba(28,43,33,0.05)] border border-[#D9D3C7]"
-                  >
-                    <div className="w-24 h-24 rounded-2xl overflow-hidden bg-[#EFECE6] border border-[#D9D3C7] flex-shrink-0">
-                      <img
-                        src={item.image}
-                        alt={item.name}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                      />
-                    </div>
-                    <div className="flex-1 text-center sm:text-left">
-                      <h3 className="text-lg font-serif font-bold text-[#1C2B21] mb-1">
-                        {item.name}
-                      </h3>
-                      <p className="text-sm text-[#707A72] font-medium uppercase tracking-widest">
-                        {item.flavor || "Premium Sattu"}
-                      </p>
-                      <div className="mt-4 flex items-center justify-center sm:justify-start gap-4">
-                        <span className="text-2xl font-serif font-bold text-[#1C3B24]">
-                          ₹{Number(item.price).toFixed(0)}
-                        </span>
-                      </div>
-                    </div>
-                    <button
-                      onClick={() => removeItem(item.id)}
-                      className="p-4 rounded-2xl bg-red-50 text-red-600 hover:bg-red-600 hover:text-white transition-all"
+              <div className="space-y-4">
+                <p className="text-[10px] font-bold text-[#0A1E13]/20 uppercase tracking-[0.4em] mb-10 pb-4 border-b border-[#0A1E13]/5">
+                  Allocated Items ({items.length})
+                </p>
+                <div className="divide-y divide-[#0A1E13]/5">
+                  {items.map((item) => (
+                    <motion.div
+                      key={item.id}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="group py-10 flex flex-col sm:flex-row items-center gap-12 transition-all duration-500"
                     >
-                      <Trash2 size={20} />
-                    </button>
-                  </div>
-                ))}
+                      <div className="w-32 h-40 bg-[#EFECE5] overflow-hidden flex-shrink-0 relative">
+                        <img
+                          src={item.image}
+                          alt={item.name}
+                          className="w-full h-full object-cover transition-transform duration-[1.2s] group-hover:scale-105"
+                        />
+                        <div className="absolute inset-0 bg-[#0A1E13]/5" />
+                      </div>
+                      
+                      <div className="flex-1 text-center sm:text-left space-y-4">
+                        <div>
+                          <span className="text-[9px] font-bold text-[#D4B27A] uppercase tracking-[0.3em] block mb-2">
+                            {item.flavor || "Organic Formulation"}
+                          </span>
+                          <h3 className="text-2xl font-serif font-light text-[#0A1E13] group-hover:text-[#D4B27A] transition-colors duration-300">
+                            {item.name}
+                          </h3>
+                        </div>
+                        <div className="flex items-center justify-center sm:justify-start gap-8 pt-4">
+                          <span className="text-xl font-sans font-medium text-[#0A1E13]">
+                            ₹{Number(item.price).toFixed(0)}
+                          </span>
+                        </div>
+                      </div>
+
+                      <button
+                        onClick={() => removeItem(item.id)}
+                        className="p-6 text-[#0A1E13]/20 hover:text-red-600 transition-all group-hover:text-[#0A1E13]/40"
+                      >
+                        <Trash2 size={18} strokeWidth={1} />
+                      </button>
+                    </motion.div>
+                  ))}
+                </div>
               </div>
             )}
           </div>
 
           {/* Summary Sidebar */}
           {items.length > 0 && (
-            <aside className="w-full lg:w-[400px] shrink-0">
-              <div className="bg-white rounded-3xl border border-[#D9D3C7] shadow-[0_30px_100px_rgba(28,43,33,0.05)] p-8 sticky top-32">
-                <h2 className="text-2xl font-serif font-bold text-[#1C2B21] mb-8">
-                  Order Summary
-                </h2>
-                <div className="space-y-4 mb-8">
-                  <div className="flex justify-between text-[#707A72] font-medium">
+            <aside className="w-full lg:w-[450px] shrink-0">
+              <div className="bg-[#0A1E13] p-12 sticky top-32 shadow-2xl">
+                <div className="flex items-center gap-4 mb-10">
+                  <div className="h-[1px] w-8 bg-[#D4B27A]" />
+                  <h2 className="text-[10px] font-bold text-[#D4B27A] uppercase tracking-[0.4em]">
+                    Order Summary
+                  </h2>
+                </div>
+                
+                <div className="space-y-6 mb-12 border-b border-white/5 pb-12">
+                  <div className="flex justify-between text-[#FBF9F6]/40 text-[10px] font-bold uppercase tracking-[0.2em]">
                     <span>Subtotal</span>
-                    <span className="font-bold text-[#1C2B21]">₹{total.toFixed(0)}</span>
+                    <span className="text-[#FBF9F6]">₹{total.toFixed(0)}</span>
                   </div>
-                  <div className="flex justify-between text-[#707A72] font-medium">
-                    <span>Shipping</span>
-                    <span className="text-[#4A5D4E] font-bold">Free</span>
+                  <div className="flex justify-between text-[#FBF9F6]/40 text-[10px] font-bold uppercase tracking-[0.2em]">
+                    <span>Allocation / Shipping</span>
+                    <span className="text-[#D4B27A]">Complimentary</span>
                   </div>
-                  <div className="flex justify-between text-[#707A72] font-medium">
-                    <span>Tax</span>
-                    <span className="font-bold text-[#1C2B21]">₹0</span>
-                  </div>
-                  <div className="pt-4 border-t border-dashed border-[#D9D3C7] flex justify-between items-end">
-                    <span className="text-sm font-black text-[#1C2B21] uppercase tracking-widest">
-                      Total Amount
-                    </span>
-                    <span className="text-4xl font-serif font-bold text-[#1C3B24] tracking-tighter">
-                      ₹{total.toFixed(0)}
-                    </span>
+                  <div className="flex justify-between text-[#FBF9F6]/40 text-[10px] font-bold uppercase tracking-[0.2em]">
+                    <span>Registry Tax</span>
+                    <span className="text-[#FBF9F6]">₹0</span>
                   </div>
                 </div>
+
+                <div className="flex justify-between items-end mb-12">
+                  <span className="text-[11px] font-bold text-[#D4B27A] uppercase tracking-[0.3em]">
+                    Total Amount
+                  </span>
+                  <span className="text-5xl font-serif font-light text-[#FBF9F6] tracking-tighter">
+                    ₹{total.toFixed(0)}
+                  </span>
+                </div>
+
                 <button
                   onClick={() => navigate("/checkout")}
-                  className="w-full py-5 bg-[#1C3B24] text-white font-black text-lg rounded-2xl hover:bg-[#112517] transition-all shadow-xl shadow-[#1C3B24]/20 mb-8"
+                  className="w-full h-16 bg-[#D4B27A] text-[#0A1E13] font-bold text-[10px] uppercase tracking-[0.4em] hover:bg-[#FBF9F6] transition-all mb-12"
                 >
                   Proceed to Checkout
                 </button>
-                {/* Trust Badges */}
-                <div className="grid grid-cols-1 gap-4 pt-8 border-t border-[#D9D3C7]">
+
+                {/* Trust Metrics */}
+                <div className="space-y-6 pt-10 border-t border-white/5">
                   {[
-                    { icon: ShieldCheck, text: "Secure Encryption", sub: "PCI DSS Compliant" },
-                    { icon: Truck, text: "Fast Delivery", sub: "2-4 Business Days" },
-                    { icon: RotateCcw, text: "Easy Returns", sub: "30-Day Guarantee" },
+                    { icon: ShieldCheck, text: "Secure Encryption", sub: "PCI DSS Level 1" },
+                    { icon: Truck, text: "Botanical Dispatch", sub: "2-4 Business Days" },
+                    { icon: RotateCcw, text: "Curated Protection", sub: "30-Day Guarantee" },
                   ].map((badge, i) => {
                     const Icon = badge.icon;
                     return (
-                      <div key={i} className="flex items-center gap-4">
-                        <div className="w-10 h-10 rounded-xl bg-[#EFECE6] border border-[#D9D3C7] flex items-center justify-center text-[#1C2B21]">
-                          <Icon size={20} />
+                      <div key={i} className="flex items-center gap-6">
+                        <div className="w-10 h-10 bg-white/5 flex items-center justify-center text-[#D4B27A] border border-white/5">
+                          <Icon size={18} strokeWidth={1} />
                         </div>
                         <div>
-                          <p className="text-xs font-bold text-[#1C2B21] leading-none">
+                          <p className="text-[10px] font-bold text-[#FBF9F6] uppercase tracking-[0.2em] mb-1">
                             {badge.text}
                           </p>
-                          <p className="text-[10px] font-bold text-[#707A72] uppercase tracking-widest mt-1">
+                          <p className="text-[9px] font-medium text-[#FBF9F6]/30 uppercase tracking-widest">
                             {badge.sub}
                           </p>
                         </div>

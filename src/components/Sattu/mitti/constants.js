@@ -1,0 +1,103 @@
+export const NAV_LINKS = ["Home", "Products", "Our Story", "Farms", "Blog", "Contact"];
+
+export const CATEGORIES = [
+  {
+    id: 1,
+    name: "Sattu",
+    tagline: "Ancient Protein Powerhouse",
+    icon: "🌾",
+    gradient: "from-amber-800/80 to-amber-900/90",
+    bg: "bg-amber-50",
+    accent: "#D4A373",
+    size: "large",
+    desc: "Cold-pressed roasted gram flour",
+  },
+  {
+    id: 2,
+    name: "Dry Fruits",
+    tagline: "Nature's Concentrated Goodness",
+    icon: "🍇",
+    gradient: "from-emerald-800/80 to-emerald-900/90",
+    bg: "bg-emerald-50",
+    accent: "#2D6A4F",
+    size: "medium",
+    desc: "Hand-picked Kashmiri selection",
+  },
+  {
+    id: 3,
+    name: "Namkeen",
+    tagline: "Village Recipes, Modern Taste",
+    icon: "🫘",
+    gradient: "from-orange-800/80 to-orange-900/90",
+    bg: "bg-orange-50",
+    accent: "#7F5539",
+    size: "medium",
+    desc: "Artisan spiced snacks",
+  },
+  {
+    id: 4,
+    name: "Healthy Snacks",
+    tagline: "Guilt-Free Indulgence",
+    icon: "🌰",
+    gradient: "from-stone-700/80 to-stone-900/90",
+    bg: "bg-stone-50",
+    accent: "#95D5B2",
+    size: "small",
+    desc: "Baked, not fried",
+  },
+  {
+    id: 5,
+    name: "Organic Flour",
+    tagline: "Stone-Ground Tradition",
+    icon: "🌿",
+    gradient: "from-yellow-800/80 to-yellow-900/90",
+    bg: "bg-yellow-50",
+    accent: "#D4A373",
+    size: "small",
+    desc: "Cold-milled heirloom grains",
+  },
+  {
+    id: 6,
+    name: "Traditional Foods",
+    tagline: "Heritage on Your Table",
+    icon: "🪔",
+    gradient: "from-rose-900/80 to-red-950/90",
+    bg: "bg-rose-50",
+    accent: "#7F5539",
+    size: "large",
+    desc: "Recipes passed through generations",
+  },
+];
+
+export const WHY_FEATURES = [
+  { icon: "🌱", title: "Farm Fresh Ingredients", desc: "Sourced directly from verified organic farms across India's finest agricultural regions." },
+  { icon: "🚫", title: "No Artificial Preservatives", desc: "Pure, clean labels — what you read is exactly what you get. Zero hidden additives." },
+  { icon: "🏺", title: "Traditional Processing", desc: "Ancient methods like cold-pressing and stone-grinding preserve every nutrient." },
+  { icon: "🔬", title: "Lab Tested Quality", desc: "Every batch undergoes rigorous third-party testing before reaching your doorstep." },
+  { icon: "♻️", title: "Sustainable Farming", desc: "Working with farmers who nurture the soil for future generations." },
+  { icon: "⚡", title: "Fast Delivery", desc: "From our temperature-controlled facilities to your home in 48–72 hours." },
+];
+
+export const HERO_SLIDES = [
+  {
+    headline: "Pure Nutrition From",
+    highlight: "India's Villages",
+    sub: "Traditional goodness delivered fresh from farms to your family.",
+    badge: "Heritage Harvest 2024",
+    tag: "Trusted by 2.5 Lakh Families",
+  },
+  {
+    headline: "Ancient Grains,",
+    highlight: "Modern Wellness",
+    sub: "Rediscover the power of sattu, superfoods, and time-tested Indian ingredients.",
+    badge: "100% Certified Organic",
+    tag: "Direct Farm Partnerships",
+  },
+  {
+    headline: "Handcrafted with",
+    highlight: "Generational Care",
+    sub: "Every product honours the hands that grow, harvest, and prepare your food.",
+    badge: "Zero Chemicals. Zero Compromise.",
+    tag: "Stone Ground • Cold Pressed • Sun Dried",
+  },
+];

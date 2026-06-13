@@ -1,137 +1,159 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Leaf, Sprout, Zap, Flame, Sparkles, ShieldCheck } from 'lucide-react';
+import { BadgeCheck, SunMedium, FlaskConical, Sprout, Leaf, ArrowRight } from 'lucide-react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, Pagination } from 'swiper/modules';
 
-const features = [
+import 'swiper/css';
+import 'swiper/css/pagination';
+
+const principles = [
   {
-    id: 1,
-    title: "No Artificial Flavours",
-    description: "Only real, natural ingredients",
-    icon: <Leaf size={32} strokeWidth={1.5} />,
+    num: '01',
+    icon: <BadgeCheck size={20} strokeWidth={1.2} />,
+    title: 'Certified Organic',
+    desc: 'Every product is certified organic with full farm-to-pack traceability and zero pesticide residue.',
   },
   {
-    id: 2,
-    title: "Plant Based Protein",
-    description: "Keeps you full & energized",
-    icon: <Sprout size={32} strokeWidth={1.5} />,
+    num: '02',
+    icon: <SunMedium size={20} strokeWidth={1.2} />,
+    title: 'Traditional Methods',
+    desc: 'Stone-ground, sun-dried, and slow-roasted using time-honoured techniques passed down generations.',
   },
   {
-    id: 3,
-    title: "Easy to Digest",
-    description: "Gentle on your stomach",
-    icon: <Zap size={32} strokeWidth={1.5} />,
+    num: '03',
+    icon: <FlaskConical size={20} strokeWidth={1.2} />,
+    title: 'Lab-Tested Purity',
+    desc: 'Batch-tested for nutritional integrity, heavy metals, and microbial safety before every dispatch.',
   },
   {
-    id: 4,
-    title: "Sustained Energy",
-    description: "No crashes, just pure fuel",
-    icon: <Flame size={32} strokeWidth={1.5} />,
+    num: '04',
+    icon: <Sprout size={20} strokeWidth={1.2} />,
+    title: 'Regenerative Farms',
+    desc: 'Sourced from partner farms practising soil restoration, fair trade, and chemical-free cultivation.',
   },
   {
-    id: 5,
-    title: "Traditional Superfood",
-    description: "Backed by centuries of wisdom",
-    icon: <Sparkles size={32} strokeWidth={1.5} />,
+    num: '05',
+    icon: <Leaf size={20} strokeWidth={1.2} />,
+    title: 'Clean Ingredients',
+    desc: 'No artificial colours, flavours, preservatives, or hidden fillers — just honest, whole food.',
   },
-  {
-    id: 6,
-    title: "Clean & Pure",
-    description: "No preservatives, no chemicals",
-    icon: <ShieldCheck size={32} strokeWidth={1.5} />,
-  }
 ];
 
-const FeatureCard = ({ feature, index }) => {
+const WhyChooseUs = () => {
+  const cardVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: [0.215, 0.61, 0.355, 1] },
+    },
+  };
+
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: index * 0.1, duration: 0.6 }}
-      whileHover={{ y: -6, scale: 1.03 }}
-      className="bg-[#1C2B21] p-6 text-center border-asymmetrical border-[#D9D3C7] shadow-[12px_12px_0px_0px_rgba(217,211,199,0.15)] group transition-all duration-300"
-    >
-      {/* Redesigned Icon Container: Hand-stamped woodcut aesthetic */}
-      <div className="w-16 h-16 rounded-full bg-[#112517] border border-[#5C4033] flex items-center justify-center text-[#D9A036] mx-auto mb-6 transition-all duration-300 shadow-inner group-hover:bg-[#D9A036] group-hover:text-[#112517] group-hover:filter-none filter grayscale sepia">
-        {feature.icon}
-      </div>
+    <section className="relative w-full py-12 md:py-20 bg-[#FAF9F6] overflow-hidden">
+      {/* Premium Grain Texture */}
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[radial-gradient(#1a1a1a_1px,transparent_1px)] [background-size:32px_32px]" />
 
-      <h3 className="text-xl font-serif font-bold text-white mb-2 leading-tight group-hover:text-[#D9A036] transition-colors">
-        {feature.title}
-      </h3>
-      <p className="text-sm font-handcrafted italic leading-relaxed text-[#D9D3C7] sepia opacity-90">
-        {feature.description}
-      </p>
-
-      {/* Decorative Traditional Assets: Asymmetrical corner flourishes */}
-      <div className="absolute top-2 left-2 w-3 h-3 border-t-2 border-l-2 border-[#8B7355] opacity-50 group-hover:opacity-100 transition-opacity"></div>
-      <div className="absolute bottom-2 right-2 w-3 h-3 border-b-2 border-r-2 border-[#8B7355] opacity-50 group-hover:opacity-100 transition-opacity"></div>
-    </motion.div>
-  );
-};
-
-const WhyChooseSection = () => {
-  return (
-    <section className="py-24 bg-[#112517] text-[#EFECE6] relative overflow-hidden border-t-4 border-b-4 border-[#8B7355]/20">
-      {/* Deep premium background texture: Organic fiber parchment with aged grain */}
-      <div className="absolute inset-0 opacity-[0.05] pointer-events-none bg-[radial-gradient(#fff_1.2px,transparent_1.2px)] [background-size:28px_28px]"></div>
-      <div className="absolute inset-0 bg-[#0A1A10] mix-blend-multiply opacity-20 filter grayscale"></div>
-
-      <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10 p-4 border-[3px] border-[#5C4033] rounded-sm bg-[#112517] shadow-[12px_12px_0px_0px_rgba(139,115,85,0.1)]">
-
-        {/* Section Header with traditional stamp aesthetic */}
-        <div className="text-center mb-16 md:mb-20 flex flex-col items-center">
-          <span className="text-[#D9A036] font-sans font-bold tracking-widest text-xs uppercase block mb-3 relative sepia filter">
-            Pure Benefits
-            <span className="absolute -bottom-1 left-0 w-full h-[1px] bg-[#D9A036]/50"></span>
-          </span>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-extrabold text-white tracking-tight pb-3 leading-[1.1]">
-            Why Choose Sattu Sattu?
-          </h2>
-          {/* Stamped rustic divider */}
-          <div className="w-16 h-2 bg-[#D9A036] mt-2 border border-[#5C4033] rounded-sm shadow-inner opacity-80 filter grayscale-[20%] sepia-[10%]"></div>
+      <div className="max-w-[1600px] mx-auto w-full px-6 md:px-12 lg:px-16 relative z-10">
+        
+        {/* Section Header Matching CategoriesSection */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-10 md:mb-14">
+          <div className="max-w-2xl">
+            <motion.span 
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="inline-block text-[10px] font-bold tracking-[0.25em] uppercase text-[#845E35] mb-4"
+            >
+              The Nativa Standard
+            </motion.span>
+            <motion.h2 
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="text-4xl md:text-5xl lg:text-6xl font-serif font-normal text-[#3D4A3E] tracking-tight leading-[1.1]"
+            >
+              Why <span className="italic">choose</span> <br className="hidden md:block" />
+              our products?
+            </motion.h2>
+          </div>
         </div>
 
-        {/* Features Grid: Hand-stamped entries in a ledger */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 p-2">
-          {features.map((feature, index) => (
-            <FeatureCard key={feature.id} feature={feature} index={index} />
-          ))}
+        {/* Swiper Slider */}
+        <div className="-mr-6 md:-mr-12 lg:mr-0">
+          <Swiper
+            modules={[Autoplay, Pagination]}
+            spaceBetween={20}
+            slidesPerView={1.2}
+            pagination={{ clickable: true, el: '.why-choose-pagination' }}
+            autoplay={{ delay: 5000, disableOnInteraction: false }}
+            breakpoints={{
+              640: { slidesPerView: 2.2 },
+              1024: { slidesPerView: 3.2, spaceBetween: 24 },
+              1280: { slidesPerView: 4.2, spaceBetween: 30 },
+              1536: { slidesPerView: 5, spaceBetween: 30 }
+            }}
+            className="pb-16"
+          >
+            {principles.map((principle) => (
+              <SwiperSlide key={principle.num} className="h-auto">
+                <motion.div 
+                  variants={cardVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                  className="group bg-white border border-[#3D4A3E]/10 hover:border-[#3D4A3E]/40 p-8 rounded-2xl flex flex-col justify-between h-full transition-all duration-500 ease-out hover:shadow-[0_12px_40px_-10px_rgba(61,74,62,0.1)] cursor-default"
+                >
+                  <div>
+                    {/* Top Header Row within Card */}
+                    <div className="flex items-center justify-between mb-8">
+                      <div className="w-10 h-10 rounded-xl bg-[#3D4A3E]/5 text-[#3D4A3E] flex items-center justify-center group-hover:bg-[#3D4A3E] group-hover:text-[#FAF9F6] transition-all duration-500">
+                        {principle.icon}
+                      </div>
+                      <span className="text-[10px] font-bold tracking-wider text-[#845E35]/50 group-hover:text-[#845E35] transition-colors duration-500">
+                        {principle.num}
+                      </span>
+                    </div>
+
+                    {/* Card Title */}
+                    <h3 className="text-xl font-serif text-[#3D4A3E] tracking-tight mb-4 transition-colors duration-500 group-hover:text-[#845E35]">
+                      {principle.title}
+                    </h3>
+                  </div>
+
+                  {/* Card Description */}
+                  <p className="text-sm text-[#3D4A3E]/60 font-light leading-relaxed pt-6 border-t border-dashed border-[#3D4A3E]/10 group-hover:border-[#3D4A3E]/20 transition-colors duration-500">
+                    {principle.desc}
+                  </p>
+                </motion.div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+          
+          {/* Custom Pagination Container */}
+          <div className="why-choose-pagination flex justify-center !w-full mt-4" />
         </div>
-      </div>
 
-      {/* Decorative Assets: Illustrated cross-hatch portraits on parchment in background space */}
-      <div className="absolute left-[-15%] top-[30%] opacity-[0.06] grayscale sepia hidden xl:block pointer-events-none">
-        <img src="/img/farmer-sage-sketch.jpg" alt="Traditional Farmer Sketch" className="w-[400px] h-auto rounded-full" />
       </div>
-      <div className="absolute right-[-15%] bottom-[10%] opacity-[0.06] grayscale sepia hidden xl:block pointer-events-none">
-        <img src="/img/tradition-wisdom-sketch.jpg" alt="Centuries of Wisdom Sketch" className="w-[350px] h-auto rounded-full" />
-      </div>
-
-      {/* Embedded CSS for custom traditional features */}
-      <style dangerouslySetInnerHTML={{
-        __html: `
-        .border-asymmetrical {
-          border-top-left-radius: 6px;
-          border-top-right-radius: 4px;
-          border-bottom-right-radius: 8px;
-          border-bottom-left-radius: 2px;
+      
+      <style dangerouslySetInnerHTML={{ __html: `
+        .why-choose-pagination .swiper-pagination-bullet {
+          width: 8px;
+          height: 8px;
+          background: #3D4A3E;
+          opacity: 0.2;
+          transition: all 0.3s ease;
         }
-        .filter.sepia {
-          filter: sepia(10%);
-        }
-        .filter.grayscale {
-          filter: grayscale(15%);
-        }
-        .group-hover:filter-none {
-          filter: none;
-        }
-        .font-handcrafted {
-          font-family: 'Aged Handcrafted', serif;
+        .why-choose-pagination .swiper-pagination-bullet-active {
+          width: 24px;
+          border-radius: 4px;
+          opacity: 1;
         }
       `}} />
     </section>
   );
 };
 
-export default WhyChooseSection;
+export default WhyChooseUs;

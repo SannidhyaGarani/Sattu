@@ -1,22 +1,21 @@
 import React from 'react';
 import Hero from '../Sattu/Hero';
-import BenefitsStrip from '../Sattu/BenefitsStrip';
+import CategoriesSection from '../Sattu/CategoriesSection';
+
 import Bestsellers from '../Sattu/Bestsellers';
-import FlavorsSection from '../Sattu/FlavorsSection';
 import WhyChooseSection from '../Sattu/WhyChooseSection';
-import HowToMake from '../Sattu/HowToMake';
 import Testimonials from '../Sattu/Testimonials';
 import OfferBanner from '../Sattu/OfferBanner';
+import HowToMake from '../Sattu/HowToMake';
 
 const Home = () => {
   return (
-    <main className="bg-brand-cream min-h-screen">
+    <main className="bg-[#FAF9F6] min-h-screen">
       <Hero />
-      <BenefitsStrip />
+      <CategoriesSection />
+      <WhyChooseSection />
       <Bestsellers />
-      <FlavorsSection />
-      {/* <WhyChooseSection /> */}
-      <HowToMake />
+      <HowToMake/>
       <OfferBanner />
       <Testimonials />
     </main>

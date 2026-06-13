@@ -1,86 +1,63 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Pagination } from 'swiper/modules';
-import { Star, ShoppingBag, ArrowRight, Heart, Sparkles } from 'lucide-react';
+import { Autoplay } from 'swiper/modules';
+import { ArrowRight, ShoppingCart, Heart } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { db } from '../../components/Firebase';
-import { collection, getDocs, query, orderBy, doc, setDoc } from 'firebase/firestore';
-import { useAuth } from '../../components/useAuth';
-import { AnimatePresence } from 'framer-motion';
+import { collection, getDocs, query, orderBy } from 'firebase/firestore';
 
-// Import Swiper styles
 import 'swiper/css';
-import 'swiper/css/pagination';
 
 const ProductCard = ({ product, idx }) => {
   const navigate = useNavigate();
-  const { user } = useAuth();
-  const [feedbackMessage, setFeedbackMessage] = useState(null);
-
-  const triggerToast = (msg) => {
-    setFeedbackMessage(msg);
-    setTimeout(() => setFeedbackMessage(null), 3000);
-  };
-
-  const addToCollection = async (e, collectionName) => {
-    e.stopPropagation();
-    if (!user) { navigate('/login'); return; }
-    // ... rest of your existing logic
-  };
 
   return (
-    <motion.div 
+    <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ delay: idx * 0.1 }}
+      transition={{ delay: idx * 0.1, duration: 0.6 }}
       onClick={() => navigate(`/product/${product.id}`)}
-      className="bg-[#FDF6E9] p-4 border-[3px] border-[#D9D3C7] group relative cursor-pointer hover:border-[#D9A036] transition-colors duration-500 flex flex-col h-full"
+      className="group cursor-pointer flex flex-col h-full bg-[#FAF9F6]"
     >
-      {/* Corner Ornaments for Traditional Look */}
-      <div className="absolute top-2 left-2 w-3 h-3 border-t border-l border-[#8B7355]"></div>
-      
-      {/* Image Block */}
-      <div className="relative aspect-[3/4] overflow-hidden bg-[#E5D3B3] mb-4 border-b-4 border-r-4 border-[#8B7355]">
-        <img 
-          src={product.image || product.images?.[0]} 
+      <div className="relative aspect-[4/5] overflow-hidden rounded-[1.5rem] bg-[#EFECE5] mb-4">
+        <img
+          src={product.image || product.images?.[0]}
           alt={product.name}
-          className="w-full h-full object-cover grayscale-[10%] sepia-[5%] transition-transform duration-700 group-hover:scale-105"
+          className="w-full h-full object-cover transition-transform duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110"
         />
-        {/* Wishlist Button - Hand-stamped style */}
-        <button 
-          onClick={(e) => addToCollection(e, 'wishlist')}
-          className="absolute top-3 right-3 w-8 h-8 bg-white border border-[#8B7355] flex items-center justify-center text-[#8B7355] hover:bg-[#8B7355] hover:text-white transition-colors"
-        >
-          <Heart size={14} />
-        </button>
-      </div>
-
-      {/* Info Block */}
-      <div className="flex flex-col flex-grow text-center">
-        <span className="text-[9px] font-bold uppercase tracking-[0.25em] text-[#D9A036] mb-1">
-          {product.flavor || "Handcrafted"}
-        </span>
-        <h3 className="text-lg font-serif font-bold text-[#1C2B21] mb-2 leading-tight">
-          {product.name}
-        </h3>
-        <div className="flex justify-center gap-1 mb-4">
-           {[...Array(5)].map((_, i) => <Star key={i} size={10} className="fill-[#D9A036] text-[#D9A036]" />)}
-        </div>
-      </div>
-      
-      {/* Price & Action Footer */}
-      <div className="border-t border-[#8B7355]/30 pt-4 mt-auto">
-        <div className="flex items-center justify-between">
-          <span className="text-lg font-serif font-bold text-[#1C2B21]">₹{product.price}</span>
+        
+        {/* Wishlist Button */}
+        <div className="absolute top-4 right-4 z-10 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
           <button 
-            onClick={(e) => addToCollection(e, 'cart')}
-            className="px-4 py-2 bg-[#1C3B24] text-white text-[10px] font-bold uppercase tracking-widest hover:bg-[#D9A036] transition-colors"
+            onClick={(e) => { e.stopPropagation(); }}
+            className="w-9 h-9 rounded-full bg-[#FAF9F6] shadow-lg flex items-center justify-center text-[#3D4A3E] hover:bg-[#3D4A3E] hover:text-[#FAF9F6] transition-all"
           >
-            Add Item
+            <Heart size={15} strokeWidth={1.5} />
           </button>
         </div>
+
+        {/* Floating Add to Cart for Desktop */}
+        <div className="absolute bottom-4 left-4 right-4 z-10 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-4 group-hover:translate-y-0">
+          <button 
+            className="w-full py-3 bg-[#3D4A3E] text-[#FAF9F6] text-[10px] font-bold uppercase tracking-wider rounded-xl backdrop-blur-sm bg-opacity-90 flex items-center justify-center gap-2 hover:bg-[#2C362D] transition-colors shadow-xl"
+          >
+            <ShoppingCart size={14} /> Quick Add
+          </button>
+        </div>
+      </div>
+
+      <div className="flex flex-col flex-grow px-1">
+        <div className="flex justify-between items-start mb-2">
+          <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#845E35]">
+            {product.category || 'Specialty'}
+          </span>
+          <span className="text-sm font-medium text-[#3D4A3E]">₹{product.price}</span>
+        </div>
+        <h3 className="text-lg font-serif text-[#3D4A3E] leading-tight group-hover:text-[#845E35] transition-colors">
+          {product.name}
+        </h3>
       </div>
     </motion.div>
   );
@@ -93,11 +70,11 @@ const BestsellerProducts = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const q = query(collection(db, "products"), orderBy("createdAt", "desc"));
+        const q = query(collection(db, 'products'), orderBy('createdAt', 'desc'));
         const snap = await getDocs(q);
-        setProducts(snap.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+        setProducts(snap.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
       } catch (error) {
-        console.error("Error fetching products:", error);
+        console.error('Error:', error);
       } finally {
         setLoading(false);
       }
@@ -105,111 +82,81 @@ const BestsellerProducts = () => {
     fetchProducts();
   }, []);
 
-  if (loading) {
-    return (
-      <section 
-        className="py-24 relative overflow-hidden border-t border-b border-[#D9D3C7] bg-cover bg-center"
-        style={{ backgroundImage: "url('/img/b2.png')" }}
-      >
-        <div className="absolute inset-0 bg-white/10 pointer-events-none"></div>
-        <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[...Array(4)].map((_, i) => (
-              <div key={i} className="space-y-6 animate-pulse">
-                <div className="aspect-[4/5] rounded-xl bg-[#D9D3C7]" />
-                <div className="h-4 bg-[#D9D3C7] rounded w-2/3" />
-                <div className="h-3 bg-[#D9D3C7] rounded w-1/2" />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-    );
-  }
-
   return (
-    <section 
-      className="py-24 relative overflow-hidden border-t border-b border-[#D9D3C7] bg-cover bg-center"
-      style={{ backgroundImage: "url('/img/b2.png')" }}
-    >
-      <div className="absolute inset-0 bg-white/10 pointer-events-none"></div>
+    <section className="relative w-full py-12 md:py-20 bg-[#FAF9F6] overflow-hidden">
+      {/* Subtle Grain Texture */}
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[radial-gradient(#1a1a1a_1px,transparent_1px)] [background-size:32px_32px]" />
 
-      <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+      <div className="max-w-[1600px] mx-auto px-6 md:px-12 lg:px-16 relative z-10">
         
-        {/* Section Title Header Block */}
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-12 lg:mb-16">
-          <div>
-            <span className="text-[#D9A036] font-sans font-bold tracking-widest text-xs uppercase mb-2 block">
-              Curated Favorites
-            </span>
-            <h2 className="text-3xl md:text-4xl font-serif font-bold text-[#1C2B21] tracking-tight">
-              Our Bestsellers
-            </h2>
+        {/* Section Header Matching CategoriesSection */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-10 md:mb-14">
+          <div className="max-w-2xl">
+            <motion.span 
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="inline-block text-[10px] font-bold tracking-[0.25em] uppercase text-[#3D4A3E]/60 mb-4"
+            >
+              Essential Reserve
+            </motion.span>
+            <motion.h2 
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="text-4xl md:text-5xl lg:text-6xl font-serif font-normal text-[#3D4A3E] tracking-tight leading-[1.1]"
+            >
+              Most <span className="italic">loved</span> <br className="hidden md:block" />
+              bestsellers.
+            </motion.h2>
           </div>
-          <Link 
-            to="/shop" 
-            className="text-xs font-sans font-bold uppercase tracking-widest text-[#1C3B24] flex items-center gap-2 hover:text-[#D9A036] transition-colors border-b border-[#1C3B24]/20 pb-1"
+          
+          <motion.div 
+            initial={{ opacity: 0, x: -10 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
           >
-            <span>View All Products</span>
-            <ArrowRight size={14} />
-          </Link>
+            <Link 
+              to="/shop" 
+              className="group inline-flex items-center gap-3 text-[#3D4A3E] border-b border-[#3D4A3E]/30 pb-1 hover:border-[#3D4A3E] transition-colors"
+            >
+              <span className="text-xs font-bold uppercase tracking-wider">Explore Entire Range</span>
+              <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </motion.div>
         </div>
 
-        {/* Desktop Grid Layout */}
-        <div className="hidden lg:grid grid-cols-4 gap-6 xl:gap-8">
-          {products.map((product, idx) => (
+        {/* Desktop Grid */}
+        <div className="hidden lg:grid grid-cols-5 gap-6">
+          {products.slice(0, 5).map((product, idx) => (
             <ProductCard key={product.id} product={product} idx={idx} />
           ))}
         </div>
 
-        {/* Mobile & Tablet Slider Layout */}
-        <div className="block lg:hidden !-mr-6 md:!-mr-12">
+        {/* Mobile/Tablet Slider */}
+        <div className="lg:hidden -mr-6 md:-mr-12">
           <Swiper
-            modules={[Autoplay, Pagination]}
-            spaceBetween={16}
-            slidesPerView={1.25}
-            pagination={{ clickable: true, modifier: 1 }}
-            autoplay={{ delay: 4000, disableOnInteraction: false }}
-            breakpoints={{
-              480: { slidesPerView: 1.6 },
+            modules={[Autoplay]}
+            spaceBetween={20}
+            slidesPerView={1.2}
+            autoplay={{ delay: 5000 }}
+            breakpoints={{ 
               640: { slidesPerView: 2.2 },
-              768: { slidesPerView: 2.5 },
+              768: { slidesPerView: 3.2 } 
             }}
-            className="pb-12 premium-product-swiper"
           >
-            {products.map((product, idx) => (
-              <SwiperSlide key={product.id} className="h-full">
+            {products.slice(0, 6).map((product, idx) => (
+              <SwiperSlide key={product.id}>
                 <ProductCard product={product} idx={idx} />
               </SwiperSlide>
             ))}
           </Swiper>
         </div>
-
       </div>
-
-      {/* Embedded Swiper Custom Pagination Styles */}
-      <style dangerouslySetInnerHTML={{__html: `
-        .premium-product-swiper .swiper-pagination-bullet {
-          background: #1C3B24 !important;
-          opacity: 0.2;
-          width: 6px;
-          height: 6px;
-          transition: all 0.3s ease;
-        }
-        .premium-product-swiper .swiper-pagination-bullet-active {
-          opacity: 1;
-          background: #D9A036 !important;
-          width: 18px;
-          border-radius: 4px;
-        }
-        .premium-product-swiper .swiper-pagination {
-          bottom: 0px !important;
-          text-align: left !important;
-        }
-      `}} />
     </section>
   );
 };
 
 export default BestsellerProducts;
-export { BestsellerProducts as Bestsellers };

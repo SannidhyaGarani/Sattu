@@ -1,213 +1,200 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { 
-  Leaf, Instagram, Facebook, Twitter, Youtube, 
-  ArrowUpRight, Phone, Mail, MapPin, ShieldCheck, 
-  Globe2, Sparkles, MoveRight
+import {
+  Leaf, Instagram, Facebook, Twitter, Youtube,
+  ArrowRight, Mail, Clock, ArrowUp, Truck,
+  ShieldCheck, Globe, Recycle,
 } from 'lucide-react';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
-  const footerLinks = {
-    collection: [
-      { name: 'Shop All', path: '/shop' },
-      { name: 'Our Story', path: '/about' },
-      { name: 'The Benefits', path: '/benefits' },
-      { name: 'Get In Touch', path: '/contact' },
-    ],
-    philosophy: [
-      { name: 'About Us', path: '/about' },
-      { name: 'Benefits', path: '/benefits' },
-      { name: 'Contact', path: '/contact' },
-    ],
-    concierge: [
-      { name: 'My Account', path: '/account' },
-      { name: 'My Cart', path: '/cart' },
-      { name: 'Wishlist', path: '/wishlist' },
-    ]
-  };
+  const shopLinks = [
+    { label: 'All Products', path: '/shop' },
+    { label: 'Organic Sattu', path: '/shop' },
+    { label: 'Dry Fruits', path: '/shop' },
+    { label: 'Namkeen & Snacks', path: '/shop' },
+    { label: 'Millets & Grains', path: '/shop' },
+    { label: 'Gift Hampers', path: '/shop' },
+  ];
+
+  const serviceLinks = [
+    { label: 'About Us', path: '/about' },
+    { label: 'Our Sourcing', path: '/benefits' },
+    { label: 'Contact', path: '/contact' },
+    { label: 'Track Order', path: '/account' },
+    { label: 'Returns', path: '/contact' },
+    { label: 'FAQ', path: '/contact' },
+  ];
+
+  const trustItems = [
+    { icon: Truck, title: 'Free Shipping', desc: 'On orders above ₹999' },
+    { icon: Globe, title: 'Farm Traceable', desc: 'Batch-level provenance' },
+    { icon: ShieldCheck, title: 'Secure Checkout', desc: '256-bit encrypted' },
+    { icon: Recycle, title: 'Eco Packaging', desc: 'Plastic-neutral delivery' },
+  ];
 
   return (
-    <footer className="bg-[#F9F8F6] text-[#1C2B21] pt-32 pb-12 overflow-hidden border-t border-[#EAE6DF] font-sans selection:bg-[#1C3B24] selection:text-white">
-      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16">
-        
-        {/* Top Tier: Epic Brand Statement & High-Conversion Luxury Newsletter */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-8 pb-24 border-b border-[#EAE6DF]">
-          
-          <div className="lg:col-span-6 flex flex-col justify-between max-w-xl">
-            <div>
-              <div className="flex items-center gap-2 text-[#D9A036] mb-6">
-                <Sparkles size={14} strokeWidth={1.5} />
-                <span className="text-xs font-bold uppercase tracking-[0.3em]">The New Standard of Wellness</span>
-              </div>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-light leading-[1.15] tracking-tight text-[#1C2B21]">
-                Reviving India’s most potent <br />
-                <span className="font-serif italic text-[#1C3B24]">ancient super-fuel</span> for the global avant-garde.
-              </h2>
-            </div>
-            
-            {/* Global Trust Anchor Badge */}
-            <div className="hidden lg:flex items-center gap-8 mt-12 pt-8 border-t border-[#EAE6DF]/60">
-              <div className="flex items-center gap-2.5 text-xs text-[#707A72]">
-                <Globe2 size={15} strokeWidth={1.5} className="text-[#1C3B24]" />
-                <span>Sourced Sustainably from Bihar</span>
-              </div>
-              <div className="flex items-center gap-2.5 text-xs text-[#707A72]">
-                <ShieldCheck size={15} strokeWidth={1.5} className="text-[#1C3B24]" />
-                <span>Certified Bio-Available Nutrition</span>
-              </div>
-            </div>
-          </div>
+    <footer className="relative font-sans">
+      {/* Gold accent bridge — separates from light Testimonials above */}
+      <div className="h-[3px] bg-gradient-to-r from-[#0A1E13] via-[#D4B27A] to-[#0A1E13]" />
 
-          {/* Luxury Newsletter Form Block */}
-          <div className="lg:col-span-5 lg:col-start-8 flex flex-col justify-end">
-            <p className="text-sm uppercase tracking-[0.2em] font-bold text-[#1C2B21] mb-2">The Inner Circle</p>
-            <p className="text-sm text-[#5C665E] mb-8 leading-relaxed font-light">
-              Join our private dispatch list. Receive masterclass recipes, clinical health reports, and priority allocations of seasonal micro-batches.
-            </p>
-            
-            <form onSubmit={(e) => e.preventDefault()} className="group relative">
-              <div className="flex items-center border-b-2 border-[#1C2B21]/10 group-focus-within:border-[#1C3B24] transition-colors duration-500 pb-3">
-                <input 
-                  type="email" 
-                  placeholder="Enter your luxury or corporate email address" 
-                  className="w-full bg-transparent text-sm font-light focus:outline-none placeholder:text-[#9A8F80] tracking-wide py-1 text-[#1C2B21]"
+      {/* Trust strip — mid-tone bridge into dark footer */}
+      <div className="bg-[#122A1C] border-b border-[#D4B27A]/10">
+        <div className="max-w-8xl mx-auto px-4 sm:px-8 md:px-16 py-10">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+            {trustItems.map(({ icon: Icon, title, desc }) => (
+              <div key={title} className="flex items-start gap-4">
+                <div className="w-10 h-10 rounded-lg bg-[#D4B27A]/10 border border-[#D4B27A]/20 flex items-center justify-center text-[#D4B27A] flex-shrink-0">
+                  <Icon size={18} strokeWidth={1.25} />
+                </div>
+                <div>
+                  <h4 className="text-[11px] font-medium tracking-[0.15em] uppercase text-[#FBF9F6]">
+                    {title}
+                  </h4>
+                  <p className="text-[11px] text-[#FBF9F6]/45 mt-1 font-light">{desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Main footer */}
+      <div className="bg-[#071510] text-[#FBF9F6] pt-20 pb-10 overflow-hidden relative">
+        <div className="absolute inset-0 opacity-[0.012] pointer-events-none bg-[linear-gradient(to_right,#FBF9F6_1px,transparent_1px),linear-gradient(to_bottom,#FBF9F6_1px,transparent_1px)] [background-size:5rem_5rem]" />
+        <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-[#D4B27A]/[0.03] blur-[100px] rounded-full pointer-events-none" />
+
+        <div className="max-w-8xl mx-auto px-4 sm:px-8 md:px-16 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-y-14 gap-x-10 xl:gap-x-20 mb-20">
+
+            {/* Brand */}
+            <div className="lg:col-span-4 flex flex-col gap-7">
+              <Link to="/" className="flex flex-col items-start select-none">
+                <span className="text-2xl font-serif font-light text-[#FBF9F6] tracking-[0.2em]">
+                  NATIVA
+                </span>
+                <span className="text-[8px] tracking-[0.5em] text-[#D4B27A] uppercase mt-1 font-bold">
+                  Organics
+                </span>
+              </Link>
+              <p className="text-[#FBF9F6]/50 text-sm leading-relaxed font-light max-w-xs">
+                India's finest organic sattu, namkeen, dry fruits, and wholesome snacks — stone-ground, sun-dried, and delivered with care.
+              </p>
+              <div className="flex gap-5">
+                {[Instagram, Facebook, Youtube, Twitter].map((Icon, i) => (
+                  <a
+                    key={i}
+                    href="#"
+                    className="w-9 h-9 rounded-full border border-[#FBF9F6]/10 flex items-center justify-center text-[#FBF9F6]/35 hover:text-[#D4B27A] hover:border-[#D4B27A]/40 transition-all duration-300"
+                  >
+                    <Icon size={15} strokeWidth={1.5} />
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            {/* Navigation */}
+            <div className="lg:col-span-4 grid grid-cols-2 gap-10">
+              <div>
+                <h5 className="text-[#D4B27A] text-[10px] font-bold uppercase tracking-[0.3em] mb-7">
+                  Shop
+                </h5>
+                <div className="flex flex-col gap-3.5">
+                  {shopLinks.map((item) => (
+                    <Link
+                      key={item.label}
+                      to={item.path}
+                      className="text-[#FBF9F6]/50 hover:text-[#FBF9F6] text-[13px] font-light transition-colors w-fit relative group"
+                    >
+                      {item.label}
+                      <span className="absolute -bottom-0.5 left-0 w-0 h-px bg-[#D4B27A] transition-all duration-300 group-hover:w-full" />
+                    </Link>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <h5 className="text-[#D4B27A] text-[10px] font-bold uppercase tracking-[0.3em] mb-7">
+                  Support
+                </h5>
+                <div className="flex flex-col gap-3.5">
+                  {serviceLinks.map((item) => (
+                    <Link
+                      key={item.label}
+                      to={item.path}
+                      className="text-[#FBF9F6]/50 hover:text-[#FBF9F6] text-[13px] font-light transition-colors w-fit relative group"
+                    >
+                      {item.label}
+                      <span className="absolute -bottom-0.5 left-0 w-0 h-px bg-[#D4B27A] transition-all duration-300 group-hover:w-full" />
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Newsletter */}
+            <div className="lg:col-span-4">
+              <h5 className="text-[#D4B27A] text-[10px] font-bold uppercase tracking-[0.3em] mb-4">
+                Stay Connected
+              </h5>
+              <p className="text-[13px] text-[#FBF9F6]/50 mb-7 font-light leading-relaxed">
+                Get early access to new harvests, seasonal recipes, and exclusive member offers.
+              </p>
+
+              <div className="flex items-center bg-[#0A1E13]/60 border border-[#FBF9F6]/10 rounded-lg overflow-hidden focus-within:border-[#D4B27A]/40 transition-colors">
+                <input
+                  type="email"
+                  placeholder="Your email address"
+                  className="flex-1 text-sm bg-transparent focus:outline-none text-[#FBF9F6] placeholder-[#FBF9F6]/25 font-light px-4 py-3.5"
                 />
-                <button type="submit" className="text-[#1C3B24] p-2 hover:translate-x-2 transition-transform duration-500">
-                  <MoveRight size={18} strokeWidth={1.5} />
+                <button
+                  className="px-5 py-3.5 bg-[#D4B27A] text-[#071510] hover:bg-[#FBF9F6] transition-colors flex-shrink-0"
+                  aria-label="Subscribe"
+                >
+                  <ArrowRight size={16} strokeWidth={1.5} />
                 </button>
               </div>
-              {/* Animated Bottom Focus Line Accent */}
-              <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-[#1C3B24] group-focus-within:w-full transition-all duration-700 ease-out" />
-            </form>
-            <p className="text-xs text-[#9A8F80] mt-3 font-light">By clicking access, you accept our premium privacy terms.</p>
-          </div>
-        </div>
 
-        {/* Middle Tier: Generous Multi-Column Editorial Index Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-12 gap-x-8 gap-y-16 pt-24 pb-24">
-          
-          {/* Flagship Brand Pillar */}
-          <div className="col-span-2 lg:col-span-4 flex flex-col gap-6 pr-0 lg:pr-12">
-            <Link to="/" className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-[#1C3B24] rounded-xl flex items-center justify-center shadow-lg shadow-[#1C3B24]/10">
-                <Leaf className="text-[#EAE6DF] w-5 h-5" strokeWidth={1.5} />
-              </div>
-              <div className="flex flex-col">
-                <span className="text-2xl font-serif font-bold tracking-tight text-[#1C2B21]">SATTU</span>
-                <span className="text-xs tracking-[0.3em] font-bold text-[#D9A036] uppercase -mt-1">
-                  Maison de la Santé
+              <div className="mt-8 flex flex-col sm:flex-row gap-6 text-[12px] font-light text-[#FBF9F6]/35">
+                <a
+                  href="mailto:hello@nativaorganics.com"
+                  className="flex items-center gap-2 hover:text-[#FBF9F6] transition-colors"
+                >
+                  <Mail size={12} strokeWidth={1.5} />
+                  hello@nativaorganics.com
+                </a>
+                <span className="flex items-center gap-2">
+                  <Clock size={12} strokeWidth={1.5} />
+                  Mon — Sat, 9AM — 6PM IST
                 </span>
               </div>
-            </Link>
-            <p className="text-xs text-[#5C665E] leading-relaxed font-light mt-2">
-              Our products are crafted with uncompromising reverence to authentic Vedic production structures. We operate at the intersection of raw purity and absolute modern biological refinement.
-            </p>
-            <div className="flex gap-5 mt-2">
-              {[Instagram, Facebook, Youtube, Twitter].map((Icon, i) => (
-                <a key={i} href="#" className="w-8 h-8 rounded-full border border-[#EAE6DF] flex items-center justify-center text-[#1C2B21] hover:bg-[#1C3B24] hover:text-[#F9F8F6] hover:border-[#1C3B24] transition-all duration-500">
-                  <Icon size={13} strokeWidth={1.5} />
-                </a>
-              ))}
             </div>
           </div>
 
-          {/* Navigation Tracks */}
-          <div className="col-span-1 lg:col-span-2 lg:col-start-6">
-            <h4 className="text-xs font-bold uppercase tracking-[0.25em] text-[#9A8F80] mb-6">The Collections</h4>
-            <ul className="space-y-4">
-              {footerLinks.collection.map((link) => (
-                <li key={link.name}>
-                  <Link to={link.path} className="text-sm font-light text-[#5C665E] hover:text-[#1C3B24] transition-colors duration-300 block">
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="col-span-1 lg:col-span-2">
-            <h4 className="text-xs font-bold uppercase tracking-[0.25em] text-[#9A8F80] mb-6">The Philosophy</h4>
-            <ul className="space-y-4">
-              {footerLinks.philosophy.map((link) => (
-                <li key={link.name}>
-                  <Link to={link.path} className="text-sm font-light text-[#5C665E] hover:text-[#1C3B24] transition-colors duration-300 block">
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="col-span-2 md:col-span-1 lg:col-span-3">
-            <h4 className="text-xs font-bold uppercase tracking-[0.25em] text-[#9A8F80] mb-6">Flagship Concierge</h4>
-            <ul className="space-y-4 mb-6">
-              {footerLinks.concierge.map((link) => (
-                <li key={link.name}>
-                  <Link to={link.path} className="text-sm font-light text-[#5C665E] hover:text-[#1C3B24] transition-colors duration-300 block">
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-            
-            {/* Direct Editorial Contact Link */}
-            <div className="pt-4 border-t border-[#EAE6DF] flex flex-col gap-2">
-              <a href="tel:+919876543210" className="text-sm text-[#1C2B21] font-medium flex items-center gap-1.5 hover:text-[#D9A036] transition-colors">
-                <span>+91 98765 43210</span>
-                <ArrowUpRight size={14} className="opacity-40" />
-              </a>
-              <a href="mailto:concierge@sattudrink.com" className="text-sm text-[#1C2B21] font-medium flex items-center gap-1.5 hover:text-[#D9A036] transition-colors">
-                <span>concierge@sattudrink.com</span>
-                <ArrowUpRight size={14} className="opacity-40" />
-              </a>
+          {/* Bottom bar */}
+          <div className="pt-8 border-t border-[#FBF9F6]/8 flex flex-col md:flex-row justify-between items-center gap-6 text-[11px] text-[#FBF9F6]/35 font-light">
+            <div className="flex items-center gap-2 text-center md:text-left">
+              <Leaf size={12} className="text-[#D4B27A]/60" strokeWidth={1.5} />
+              <p>© {currentYear} Nativa Organics. All rights reserved.</p>
             </div>
-          </div>
 
+            <div className="flex items-center gap-6 opacity-30">
+              {['UPI', 'Visa', 'Mastercard', 'Amex'].map((method) => (
+                <span key={method} className="text-[9px] tracking-[0.15em] uppercase font-medium">
+                  {method}
+                </span>
+              ))}
+            </div>
+
+            <button
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              className="w-10 h-10 border border-[#FBF9F6]/10 rounded-full flex items-center justify-center text-[#FBF9F6]/50 hover:border-[#D4B27A] hover:text-[#D4B27A] transition-all duration-300"
+              aria-label="Back to top"
+            >
+              <ArrowUp size={15} strokeWidth={1.5} />
+            </button>
+          </div>
         </div>
-
-        {/* Lower Massive Typography Display Row */}
-       
-        {/* Bottom Tier: Legal Matrix, Smooth Scroll Anchor, and Premium Payment Badges */}
-        <div className="pt-8 border-t border-[#EAE6DF] flex flex-col lg:flex-row justify-between items-center gap-8">
-          
-          {/* Copyright/Legal link lineup */}
-          <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8 order-2 lg:order-1">
-            <p className="text-[#9A8F80] text-sm font-light">
-              © {currentYear} Sattu Drink Global Luxury Inc.
-            </p>
-            <div className="flex gap-4 text-xs text-[#707A72] font-light">
-              <a href="#" className="hover:text-[#1C3B24] transition-colors">Privacy Charter</a>
-              <span>·</span>
-              <a href="#" className="hover:text-[#1C3B24] transition-colors">Terms of Luxury Service</a>
-              <span>·</span>
-              <a href="#" className="hover:text-[#1C3B24] transition-colors">Accessibility Matrix</a>
-            </div>
-          </div>
-          
-          {/* Ultra-clean Minimalist Gateway Logos */}
-          <div className="flex items-center gap-8 opacity-30 hover:opacity-75 transition-opacity duration-500 order-1 lg:order-2">
-             <img src="https://upload.wikimedia.org/wikipedia/commons/e/e1/UPI-Logo-vector.svg" alt="UPI" className="h-4 grayscale" />
-             <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="VISA" className="h-3 grayscale" />
-             <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" className="h-5 grayscale" />
-             <img src="https://upload.wikimedia.org/wikipedia/commons/c/cb/Rupay-Logo.svg" alt="RuPay" className="h-4 grayscale" />
-          </div>
-
-          {/* Luxury Floating Smooth Top Interactive Module */}
-          <button 
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="group flex items-center gap-3 text-sm uppercase tracking-[0.2em] font-semibold text-[#1C2B21] hover:text-[#D9A036] transition-colors duration-300 order-3"
-          >
-            <span>Return to Zenith</span>
-            <div className="w-8 h-8 rounded-full border border-[#EAE6DF] group-hover:bg-[#1C3B24] group-hover:border-[#1C3B24] flex items-center justify-center text-[#1C2B21] group-hover:text-white transition-all duration-500">
-              <ArrowUpRight size={14} className="-rotate-45 group-hover:rotate-0 transition-transform duration-500" />
-            </div>
-          </button>
-          
-        </div>
-
       </div>
     </footer>
   );
